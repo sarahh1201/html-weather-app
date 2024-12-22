@@ -1,6 +1,18 @@
 import requests
+import panel as pn
 #from pyscript import Element
-    
+
+pn.extension()
+
+city = pn.widgets.TextInput(name='City', value="Vancouver") 
+temp_units = pn.widgets.Select(name='Units', options=["Metric (C)", "Imperial (F)", "Kelvin (K)"], value="Metric (C)")
+
+output = pn.pane.Markdown("Enter a city and select temperature units, then click 'Get Weather'.")
+
+row = pn.Row(city, temp_units)
+row.servable(target='controls')
+
+'''
 # Finding the data of the input city
 def get_city(city):     
     api_key = 'b2273b21514c4decb2b45606240806'  # API key from weatherapi.com
@@ -48,10 +60,11 @@ def get_data(url):
     else:
         print(f"Error: Unable to fetch data. HTTP Status code: {response.status_code}")
         
-def main():
-    city = input("Enter city name: ")
-    url = get_city(city)
-    get_data(url)
+#def main():
+#    city = input("Enter city name: ")
+#    url = get_city(city)
+#    get_data(url)
     
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+#    main()
+'''

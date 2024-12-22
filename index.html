@@ -5,29 +5,35 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Weather</title>
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pyscript@0.6.0/pyscript.min.js">
         <script defer src="https://cdn.jsdelivr.net/npm/pyscript@0.6.0/pyscript.min.js"></script>
+
+        <link rel="stylesheet" href="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.0.min.css">
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@holoviz/panel@latest/dist/panel.min.js"></script>
+
     </head>
     <body>
         <h1>Welcome to Pocket Weather!</h1>
         <h3>🌦️🌧️⛈️</h3>
         <h3>Where would you like to know the weather?</h3>
 
-        <div>
+        <!--<div>
             <input id="city" type="text" placeholder="Enter city name"/>
             <button id="city-search" type="submit" py-click="get_city">Find City</button><br>
-        </div id=city>
+        </div id=city>-->
         
         <!--Tempuratures are displayed in metric by default-->
-        <div>
+        <!--<div>
             <br><button id="temp-units" type="submit" py-click="get_units('i')">Fahrenheit</button>
             <button id="temp-units" type="submit" py-click="get_units('k')">Kelvins</button>
-        </div id=units>
+        </div id=units>-->
 
-        <div>
-            <p>Test down below</p>
-        </div id =test>
-
-        <script type = "py" src = "script.py"></script> 
+        <py-script>
+            display("Hello world")
+        </py-script>
+        <py-script src="./script.py" config="./pyscript.toml"></py-script>
+        <p>testing</p>
 
     </body>
 </html>
