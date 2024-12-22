@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weather</title>
+        <link rel="stylesheet" href="style.css">
+        <script defer src="https://cdn.jsdelivr.net/npm/pyscript@0.6.0/pyscript.min.js"></script>
+    </head>
+    <body>
+        <h1>Welcome to Pocket Weather!</h1>
+        <h3>🌦️🌧️⛈️</h3>
+        <h3>Where would you like to know the weather?</h3>
+
+        <div>
+            <input id="city" type="text" placeholder="Enter city name"/>
+            <button id="city-search" type="submit" py-click="get_city">Find City</button><br>
+        </div id=city>
+        
+        <div>
+            <br><button id="temp-units" type="submit" py-click="get_units('i')">Imperial</button>
+            <button id="temp-units" type="submit" py-click="get_units('k')">Kelvins</button>
+            <button id="temp-units" type="submit" py-click="get_units('m')">Metric</button>
+        </div id=units>
+
+        <script type = "py" src = "script.py"></script>
+    </body>
+</html>
