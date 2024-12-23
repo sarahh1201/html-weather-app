@@ -1,95 +1,75 @@
-document.getElementById('demo').innerHTML = 'Hello JavaScript';
-let city = prompt("Please enter a city: ");
-//let units = prompt("Metric (C), Imperial (F), Kelvin (K)");
-
-function get_url(city)
+function get_weather()
 {
+    var city = document.getElementById("my_city").value;
+    const select_units = document.getElementById("units");
+    let units = select_units.value;
+    
     const api_key = 'b2273b21514c4decb2b45606240806';  // API key from weatherapi.com
-    const url = 'http://api.weatherapi.com/v1/forecast.json?key="{api_key}"&q={city}'; 
+    const url = "http://api.weatherapi.com/v1/forecast.json?key="+api_key+"&q="+city; 
 
-    fetch(url).then(function(response) {
-        return response.json();
-      }).then(function(data) {
-        console.log(data);
-      }).catch(function(err) {
+    fetch(url)
+    .then(function(response) {
+        return response.json(); // Parse the response body as JSON
+    })
+    .then(function(data) {
+        console.log(data);  // Log the data to check it in the console
+
+        // Display the data on the webpage using backticks for template literals
+        let output = document.getElementById("weather_output");
+
+        let loc = data.location.name+", "+data.location.region+", "+data.location.country;
+        let locTime = data.location.localtime;
+        let cond = data.forecast.forecastday[0].day.condition.text+"<br>";
+
+        switch(units)
+            {
+            case 'i':
+                temp = ("Temperature: "+data.current.temp_f+"°F <br>"
+                    + "Feels Like: "+data.current.feelslike_f+"°F <br>"
+                    + "Wind Chill: "+data.current.windchill_f+"°F <br>"
+                    + "High: "+data.forecast.forecastday[0].day.maxtemp_f+"°F <br>"
+                    + "Low: "+data.forecast.forecastday[0].day.mintemp_f+"°F <br>"
+                    + "Average: "+data.forecast.forecastday[0].day.avgtemp_f+"°F <br>");
+                break;
+            case 'k':
+                temp = ("Temperature: "+((273.15+data.current.temp_c).toFixed(2))+"K <br>"
+                    + "Feels Like: "+((273.15+data.current.feelslike_c).toFixed(2))+"K <br>"
+                    + "Wind Chill: "+((273.15+data.current.windchill_c).toFixed(2))+"K <br>"
+                    + "High: "+((273.15+data.forecast.forecastday[0].day.maxtemp_c).toFixed(2))+"K <br>"
+                    + "Low: "+((273.15+data.forecast.forecastday[0].day.mintemp_c).toFixed(2))+"K <br>"
+                    + "Average: "+((273.15+data.forecast.forecastday[0].day.avgtemp_c).toFixed(2))+"K <br>");
+                break;
+            default:
+                temp = ("Temperature: "+data.current.temp_c+"°C <br>"
+                    + "Feels Like: "+data.current.feelslike_c+"°C <br>"
+                    + "Wind Chill: "+data.current.windchill_c+"°C <br>"
+                    + "High: "+data.forecast.forecastday[0].day.maxtemp_c+"°C <br>"
+                    + "Low: "+data.forecast.forecastday[0].day.mintemp_c+"°C <br>"
+                    + "Average: "+data.forecast.forecastday[0].day.avgtemp_c+"°C <br>");
+                break;
+            }
+
+
+        let precipWind_m = ("Precipication: "+data.current.precip_mm+" mm <br>"
+                        + "Wind: "+data.current.wind_kph+" kph <br>");
+    
+        let humid = ("Humitidy: "+data.current.humidity+"%<br>");
+
+
+        let lastUpdate = ("Last Updated: "+data.current.last_updated+"<br>");
+
+        output.innerHTML = `<b>${loc} </b><br>
+                            <i>${locTime} </i><br>
+                            ${cond} <br>
+                            ${temp} <br>
+                            ${precipWind_m} <br>
+                            ${humid}<br>
+                            ${lastUpdate} <br>`; 
+    })
+    .catch(function(err) {
         console.log('Fetch Error :-S', err);
-      });
-
+        let output = document.getElementById("weather_output");
+        output.innerHTML = "Error: Unable to fetch weather data."; // Display an error message
+    });
 }
 
-
-  
-
-/*
-import requests
-import panel as pn
-from pyscript import display
-
-pn.extension()
-
-city = pn.widgets.TextInput(name='City', value="Vancouver") 
-temp_units = pn.widgets.Select(name='Units', options=["Metric (C)", "Imperial (F)", "Kelvin (K)"], value="Metric (C)")
-
-
-# Finding the data of the input city
-"""def get_city(city):     
-    api_key = 'b2273b21514c4decb2b45606240806'  # API key from weatherapi.com
-    url = f"http://api.weatherapi.com/v1/forecast.json?key={api_key}&q={city}" 
-    return url"""
-    
-url = "http://api.weatherapi.com/v1/forecast.json?key=b2273b21514c4decb2b45606240806&q=vancouver"
-
-def get_data(url):
-    response = requests.get(url)
-
-    temp_units = input("Metric (m), imperial (i) or kelvin (k): ")
-
-    if response.status_code == 200:
-        weather_data = response.json()
-        location = weather_data['location']
-        current = weather_data['current']
-        forecast = weather_data['forecast']['forecastday'][0]['day']
-
-        # Temperature conversions
-        
-        # Kelvins (K)
-        if temp_units == 'k':
-            temp = f"\nTemperature: {current['temp_c'] + 273.15:.2f} K \nFeels Like:: {current['feelslike_f']+273.15:.2f} K \nHigh: {forecast['maxtemp_c']+273.15:.2f} K \nLow: {forecast['mintemp_c']+273.15:.2f} K\n"
-            wind = f"\nWind: {current['wind_kph']} kph"
-            precip = f"\nPrecipitation: {current['precip_mm']} mm"
-            
-        # Imperial (F)
-        elif temp_units == 'i' or temp_units == 'f':
-            temp = f"\nTemperature: {current['temp_f']}°F \nFeels Like:: {current['feelslike_f']}°F \nHigh: {forecast['maxtemp_f']}°F \nLow: {forecast['mintemp_f']}°F\n"
-            wind = f"\nWind: {current['wind_mph']} mph"
-            precip = f"\nPrecipitation: {current['precip_in']} in"
-            
-        # Metric (C) - Defaults to metric   
-        else: 
-            temp = f"\nTemperature: {current['temp_c']}°C \nFeels Like: {current['feelslike_c']}°C \nHigh: {forecast['maxtemp_c']}°C \nLow: {forecast['mintemp_c']}°C\n"
-            wind = f"\nWind: {current['wind_kph']} kph"
-            precip = f"\nPrecipitation: {current['precip_mm']} mm"
-                
-        loc = f"\n{location['name']} - {location['region']} - {location['country']}"
-        cond = f"\nCondition: {current['condition']['text']} \nHumidity: {current['humidity']}%"
-        update = f"\nLast updated: {current['last_updated']}\n"
-        icon = f"http:{current['condition']['icon']}"
-        
-        details = f'''
-        {loc}\n 
-        {temp}\n 
-        {wind}\n 
-        {precip}\n 
-        {cond}\n 
-        {update}\n 
-        '''
-        
-        #pn.widgets.StaticText(details)
-        #print(details)
-        return details
-                
-    else:
-        #print(f"Error: Unable to fetch data. HTTP Status code: {response.status_code}")
-        return f'Error: Unable to fetch data. HTTP Status code: {response.status_code}'
-        
-*/
