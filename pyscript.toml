@@ -1,3 +1,6 @@
 name = "Weather App"
 description = "Basic weather app."
-packages = ["panel==1.5.5"]
+packages = [
+    "panel==1.5.5", 
+    "requests"
+]

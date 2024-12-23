@@ -25,13 +25,27 @@
             <button id="temp-units" type="submit" py-click="get_units('k')">Kelvins</button>
         </div id=units>-->
 
-        <script type="mpy" terminal>
-            from pyscript import display
-            animal = input("Enter an animal: ")
-            display("Hello world")
-            display(animal)
-            print("Hello terminal")
+        <input type="text" id="my_input" />
+        <button type="button" id="my_button" >Click me</button>
+        <div id="output"></div>
+        
+        <script type="mpy">
+            from pyscript import when, display, document
+            @when ("click", "#my_button")
+            def on_click(event):
+                result = document.querySelector("#my_input").value
+                display(f"Your input: {result}",target="output")
+                #print(result)
         </script>
+        <label for="units">Tempurature Units:</label>
+
+        <select name="units" id="units">
+        <option value="m">Celcius</option>
+        <option value="i">Fahrenheit</option>
+        <option value="k">Kelvins</option>
+        </select>
+        <div id="controls"></div>
+
         <py-script src="./script.py" config="./pyscript.toml"></py-script>
 
     </body>

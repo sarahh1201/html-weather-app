@@ -1,23 +1,20 @@
 import requests
 import panel as pn
-#from pyscript import display
+from pyscript import display
 
 pn.extension()
 
 city = pn.widgets.TextInput(name='City', value="Vancouver") 
 temp_units = pn.widgets.Select(name='Units', options=["Metric (C)", "Imperial (F)", "Kelvin (K)"], value="Metric (C)")
 
-output = pn.pane.Markdown("Enter a city and select temperature units, then click 'Get Weather'.")
-
-row = pn.Row(city, temp_units)
-row.servable(target='controls')
-
 
 # Finding the data of the input city
-def get_city(city):     
+"""def get_city(city):     
     api_key = 'b2273b21514c4decb2b45606240806'  # API key from weatherapi.com
     url = f"http://api.weatherapi.com/v1/forecast.json?key={api_key}&q={city}" 
-    return url
+    return url"""
+    
+url = "http://api.weatherapi.com/v1/forecast.json?key=b2273b21514c4decb2b45606240806&q=vancouver"
 
 def get_data(url):
     response = requests.get(url)
@@ -64,16 +61,11 @@ def get_data(url):
         {update}\n 
         '''
         
-        pn.widgets.StaticText(details)
+        #pn.widgets.StaticText(details)
         #print(details)
+        return details
                 
     else:
-        print(f"Error: Unable to fetch data. HTTP Status code: {response.status_code}")
+        #print(f"Error: Unable to fetch data. HTTP Status code: {response.status_code}")
+        return f'Error: Unable to fetch data. HTTP Status code: {response.status_code}'
         
-#def main():
-#    city = input("Enter city name: ")
-#    url = get_city(city)
-#    get_data(url)
-    
-#if __name__ == "__main__":
-#    main()
