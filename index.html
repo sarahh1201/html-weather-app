@@ -14,29 +14,10 @@
         <h3>🌦️🌧️⛈️</h3>
         <h3>Where would you like to know the weather?</h3>
 
-        <!--<div>
-            <input id="city" type="text" placeholder="Enter city name"/>
-            <button id="city-search" type="submit" py-click="get_city">Find City</button><br>
-        </div id=city>-->
-        
-        <!--Tempuratures are displayed in metric by default-->
-        <!--<div>
-            <br><button id="temp-units" type="submit" py-click="get_units('i')">Fahrenheit</button>
-            <button id="temp-units" type="submit" py-click="get_units('k')">Kelvins</button>
-        </div id=units>-->
-
-        <input type="text" id="my_input" />
-        <button type="button" id="my_button" >Click me</button>
+        <input type="text" id="my_city" />
+        <button type="button" id="my_button" onclick="get_weather()">Get Weather</button>
         <div id="output"></div>
         
-        <script type="mpy">
-            from pyscript import when, display, document
-            @when ("click", "#my_button")
-            def on_click(event):
-                result = document.querySelector("#my_input").value
-                display(f"Your input: {result}",target="output")
-                #print(result)
-        </script>
         <label for="units">Tempurature Units:</label>
 
         <select name="units" id="units">
@@ -44,11 +25,62 @@
         <option value="i">Fahrenheit</option>
         <option value="k">Kelvins</option>
         </select>
-        <div id="controls"></div>
-        <p id="demo"></p>
-        <button type="button" onclick='document.getElementById("demo").innerHTML = "Hello JavaScript!"'>Click Me!</button>
 
-        <py-script src="./script.js" ></py-script>
+        <script>
+            function get_weather(city)
+            {
+                var city = document.getElementById("my_city").value;
+                const api_key = 'b2273b21514c4decb2b45606240806';  // API key from weatherapi.com
+                const url = "http://api.weatherapi.com/v1/forecast.json?key="+api_key+"&q="+city; 
+
+                fetch(url)
+                .then(function(response) {
+                    return response.json(); // Parse the response body as JSON
+                })
+                .then(function(data) {
+                    console.log(data);  // Log the data to check it in the console
+        
+                    // Display the data on the webpage using backticks for template literals
+                    let output = document.getElementById("weather_output");
+
+                    let loc = data.location.name+", "+data.location.region+", "+data.location.country;
+                    let locTime = data.location.localtime;
+                    let cond = data.forecast.forecastday[0].day.condition.text+"<br>";
+    
+                    let temp = ("Temperature: "+data.current.temp_c+"°C <br>"
+                                    + "Feels Like: "+data.current.feelslike_c+"°C <br>"
+                                    + "Wind Chill: "+data.current.windchill_c+"°C <br>"
+                                    + "High: "+data.forecast.forecastday[0].day.maxtemp_c+"°C <br>"
+                                    + "Low: "+data.forecast.forecastday[0].day.mintemp_c+"°C <br>"
+                                    + "Average: "+data.forecast.forecastday[0].day.avgtemp_c+"°C <br>");
+
+                    let precipWind_m = ("Precipication: "+data.current.precip_mm+" mm <br>"
+                                    + "Wind: "+data.current.wind_kph+" kph <br>");
+                
+                    let humid = ("Humitidy: "+data.current.humidity+"%<br>");
+
+
+                    let lastUpdate = ("Last Updated: "+data.current.last_updated+"<br>");
+
+                    output.innerHTML = `<b>${loc} </b><br>
+                                        <i>${locTime} </i><br>
+                                        ${cond} <br>
+                                        ${temp} <br>
+                                        ${precipWind_m} <br>
+                                        ${humid}<br>
+                                        ${lastUpdate} <br>`; 
+                })
+                .catch(function(err) {
+                    console.log('Fetch Error :-S', err);
+                    let output = document.getElementById("weather_output");
+                    output.innerHTML = "Error: Unable to fetch weather data."; // Display an error message
+                });
+        }
+        </script>
+
+        <p id="weather_output"></p>
+
+        <script src="./script.js" ></script>
 
     </body>
 </html>
