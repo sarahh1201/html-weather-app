@@ -1,0 +1,5 @@
+[tool.pyscript]
+packages = [
+    "requests",
+    "panel"
+]

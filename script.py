@@ -1,6 +1,6 @@
 import requests
 import panel as pn
-#from pyscript import Element
+#from pyscript import display
 
 pn.extension()
 
@@ -12,7 +12,7 @@ output = pn.pane.Markdown("Enter a city and select temperature units, then click
 row = pn.Row(city, temp_units)
 row.servable(target='controls')
 
-'''
+
 # Finding the data of the input city
 def get_city(city):     
     api_key = 'b2273b21514c4decb2b45606240806'  # API key from weatherapi.com
@@ -55,7 +55,17 @@ def get_data(url):
         update = f"\nLast updated: {current['last_updated']}\n"
         icon = f"http:{current['condition']['icon']}"
         
-        print(loc, temp, wind, precip, cond, update)
+        details = f'''
+        {loc}\n 
+        {temp}\n 
+        {wind}\n 
+        {precip}\n 
+        {cond}\n 
+        {update}\n 
+        '''
+        
+        pn.widgets.StaticText(details)
+        #print(details)
                 
     else:
         print(f"Error: Unable to fetch data. HTTP Status code: {response.status_code}")
@@ -67,4 +77,3 @@ def get_data(url):
     
 #if __name__ == "__main__":
 #    main()
-'''
