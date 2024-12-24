@@ -72,12 +72,21 @@ function get_weather()
                     + "High: "+data.forecast.forecastday[0].day.maxtemp_f+"°F <br>"
                     + "Low: "+data.forecast.forecastday[0].day.mintemp_f+"°F <br>"
                     + "Average: "+data.forecast.forecastday[0].day.avgtemp_f+"°F <br>");
+
                 precipWind = ("Precipication: "+data.current.precip_in+" in <br>"
+                    + "Total Precipication: "+data.forecast.forecastday[0].day.totalprecip_in+" in <br>"
+                    + "Humitidy: "+data.current.humidity+"%<br>"
+                    + "<b>Rain</b><br>"
+                    + "Change of Rain: "+data.forecast.forecastday[0].day.daily_chance_of_rain+"% <br>"
+                    + "<b>Snow</b><br>"
+                    + "Change of Snow: "+data.forecast.forecastday[0].day.daily_chance_of_snow+"% <br>"
+                    + "<b>Wind</b><br>"
                     + "Wind: "+data.current.wind_mph+" mph <br>"
                     + "Wind Direction: "+data.current.wind_dir+"<br>"
                     + "Degree: "+data.current.wind_degree+ "<br>");
                 
                 break;
+
             case 'k':
                 temp = ("Temperature: "+((273.15+data.current.temp_c).toFixed(2))+"K <br>"
                     + "Feels Like: "+((273.15+data.current.feelslike_c).toFixed(2))+"K <br>"
@@ -85,11 +94,20 @@ function get_weather()
                     + "High: "+((273.15+data.forecast.forecastday[0].day.maxtemp_c).toFixed(2))+"K <br>"
                     + "Low: "+((273.15+data.forecast.forecastday[0].day.mintemp_c).toFixed(2))+"K <br>"
                     + "Average: "+((273.15+data.forecast.forecastday[0].day.avgtemp_c).toFixed(2))+"K <br>");
+
                 precipWind = ("Precipication: "+data.current.precip_mm+" mm <br>"
+                    + "Total Precipication: "+data.forecast.forecastday[0].day.totalprecip_in+" in <br>"
+                    + "Humitidy: "+data.current.humidity+"%<br>"
+                    + "<b>Rain</b><br>"
+                    + "Change of Rain: "+data.forecast.forecastday[0].day.daily_chance_of_rain+"% <br>"
+                    + "<b>Snow</b><br>"
+                    + "Change of Snow: "+data.forecast.forecastday[0].day.daily_chance_of_snow+"% <br>"
+                    + "<b>Wind</b><br>"
                     + "Wind: "+data.current.wind_kph+" kph <br>"
                     + "Wind Direction: "+data.current.wind_dir+"<br>"
                     + "Degree: "+data.current.wind_degree+ "<br>");
                 break;
+
             default:
                 temp = ("Temperature: "+data.current.temp_c+"°C <br>"
                     + "Feels Like: "+data.current.feelslike_c+"°C <br>"
@@ -97,18 +115,24 @@ function get_weather()
                     + "High: "+data.forecast.forecastday[0].day.maxtemp_c+"°C <br>"
                     + "Low: "+data.forecast.forecastday[0].day.mintemp_c+"°C <br>"
                     + "Average: "+data.forecast.forecastday[0].day.avgtemp_c+"°C <br>");
+
                 precipWind = ("Precipication: "+data.current.precip_mm+" mm <br>"
+                    + "Total Precipication: "+data.forecast.forecastday[0].day.totalprecip_in+" in <br>"
+                    + "Humitidy: "+data.current.humidity+"%<br>"
+                    + "<b>Rain</b><br>"
+                    + "Change of Rain: "+data.forecast.forecastday[0].day.daily_chance_of_rain+"% <br>"
+                    + "<b>Snow</b><br>"
+                    + "Change of Snow: "+data.forecast.forecastday[0].day.daily_chance_of_snow+"% <br>"
+                    + "<b>Wind</b><br>"
                     + "Wind: "+data.current.wind_kph+" kph <br>"
                     + "Wind Direction: "+data.current.wind_dir+"<br>"
                     + "Degree: "+data.current.wind_degree+ "<br>");
                 break;
             }
-    
-        let humid = ("Humitidy: "+data.current.humidity+"%<br>");
 
         //OUTPUTS
         temp_output.innerHTML = `${temp}`; 
-        wind_precip_output.innerHTML = `${precipWind} <br>${humid}<br>`;
+        wind_precip_output.innerHTML = `${precipWind}<br>`;
         update.innerHTML = `Last Updated: ${data.current.last_updated}<br>`;
         cond_icon.src = `${icon}`;
     })

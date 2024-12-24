@@ -52,6 +52,9 @@ body {
 
 
 /* MAIN HEADINGS */
+.heading {
+    line-height: 15px;
+}
 h1 {
     color: rgb(13, 37, 38);
 }
@@ -82,7 +85,10 @@ h3 {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 .weather {
+
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Two equal columns */
-    gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;  /*Two equal columns */
+    text-align:justify;
+    justify-content: center;
+
   }
