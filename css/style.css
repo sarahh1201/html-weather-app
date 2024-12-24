@@ -3,11 +3,13 @@ body {
     background-color: hsl(195, 25%, 72%);
     text-align: center;
     font-family: 'Times New Roman', Times, serif;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Optional: Remove padding if needed */
 }
 
 /* NAVIGATION BAR - START*/
 .nav { /* Bar itself */
-    width: 100%;
+    width: 98.8%;
     height: 40px;
     display: flex;
     justify-content: space-between;
@@ -56,6 +58,14 @@ h1 {
 h3 {
     color: rgb(66, 109, 110);  
 }
+
+/* MAIN IMAGE */
+.styled-image {
+    width: 99.8%; /* Adjust width */
+    height: auto; /* Maintain aspect ratio */
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow */
+  }  
 
 /* REST OF BODY SETTINGS */
 .page {
