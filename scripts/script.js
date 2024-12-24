@@ -21,6 +21,8 @@ function get_weather()
         let update = document.getElementById("update_output");
         let cond_icon = document.getElementById("cond_icon");
 
+        let hourlyTemp_output = document.getElementById("Hourlytempurature_output")
+
         // To be outputed 
         let loc = data.location.name+", "+data.location.region+", "+data.location.country;
         let cond = data.forecast.forecastday[0].day.condition.text+"<br>";
@@ -67,7 +69,7 @@ function get_weather()
         switch(units)
             {
             case 'i':
-                temp = ("Temperature: "+data.current.temp_f+"°F <br>"
+                temp = ("<b>TODAY</b><br>Temperature: "+data.current.temp_f+"°F <br>"
                     + "Feels Like: "+data.current.feelslike_f+"°F <br>"
                     + "Wind Chill: "+data.current.windchill_f+"°F <br>"
                     + "High: "+data.forecast.forecastday[0].day.maxtemp_f+"°F <br>"
@@ -78,19 +80,23 @@ function get_weather()
                     + "Total Precipication: "+data.forecast.forecastday[0].day.totalprecip_in+" in <br>"
                     + "Humitidy: "+data.current.humidity+"%<br>"
                     + "<b>Rain</b><br>"
-                    + "Change of Rain: "+data.forecast.forecastday[0].day.daily_chance_of_rain+"% <br>"
+                    + "Chance of Rain: "+data.forecast.forecastday[0].day.daily_chance_of_rain+"% <br>"
                     + "<b>Snow</b><br>"
-                    + "Change of Snow: "+data.forecast.forecastday[0].day.daily_chance_of_snow+"% <br>");
+                    + "Chance of Snow: "+data.forecast.forecastday[0].day.daily_chance_of_snow+"% <br>");
 
                 wind = ("<b>Wind</b><br>"
                     + "Wind: "+data.current.wind_mph+" mph <br>"
                     + "Wind Direction: "+data.current.wind_dir+"<br>"
                     + "Degree: "+data.current.wind_degree+ "<br>");
+
+                hourTemp = ("<b>HOURLY</b><br>Temperature: "+data.forecast.forecastday[0].hour[0].temp_f+"°F <br>"
+                    + "Feels Like: "+data.forecast.forecastday[0].hour[0].feelslike_f+"°F <br>"
+                    + "Wind Chill: "+data.forecast.forecastday[0].hour[0].windchill_f+"°F <br>");
                 
                 break;
 
             case 'k':
-                temp = ("Temperature: "+((273.15+data.current.temp_c).toFixed(2))+"K <br>"
+                temp = ("<b>TODAY</b><br>Temperature: "+((273.15+data.current.temp_c).toFixed(2))+"K <br>"
                     + "Feels Like: "+((273.15+data.current.feelslike_c).toFixed(2))+"K <br>"
                     + "Wind Chill: "+((273.15+data.current.windchill_c).toFixed(2))+"K <br>"
                     + "High: "+((273.15+data.forecast.forecastday[0].day.maxtemp_c).toFixed(2))+"K <br>"
@@ -101,18 +107,22 @@ function get_weather()
                     + "Total Precipication: "+data.forecast.forecastday[0].day.totalprecip_mm+" mm <br>"
                     + "Humitidy: "+data.current.humidity+"%<br>"
                     + "<b>Rain</b><br>"
-                    + "Change of Rain: "+data.forecast.forecastday[0].day.daily_chance_of_rain+"% <br>"
+                    + "Chance of Rain: "+data.forecast.forecastday[0].day.daily_chance_of_rain+"% <br>"
                     + "<b>Snow</b><br>"
-                    + "Change of Snow: "+data.forecast.forecastday[0].day.daily_chance_of_snow+"% <br>");
+                    + "Chance of Snow: "+data.forecast.forecastday[0].day.daily_chance_of_snow+"% <br>");
                 
                 wind = ("<b>Wind</b><br>"
                     + "Wind: "+data.current.wind_kph+" kph <br>"
                     + "Wind Direction: "+data.current.wind_dir+"<br>"
                     + "Degree: "+data.current.wind_degree+ "<br>");
+                    
+                hourTemp = ("<b>HOURLY</b><br>Temperature: "+((273.15+data.forecast.forecastday[0].hour[0].temp_c).toFixed(2))+"K <br>"
+                    + "Feels Like: "+((273.15+data.forecast.forecastday[0].hour[0].feelslike_c).toFixed(2))+"K <br>"
+                    + "Wind Chill: "+((273.15+data.forecast.forecastday[0].hour[0].windchill_c).toFixed(2))+"K <br>");
                 break;
 
             default:
-                temp = ("Temperature: "+data.current.temp_c+"°C <br>"
+                temp = ("<b>TODAY</b><br>Temperature: "+data.current.temp_c+"°C <br>"
                     + "Feels Like: "+data.current.feelslike_c+"°C <br>"
                     + "Wind Chill: "+data.current.windchill_c+"°C <br>"
                     + "High: "+data.forecast.forecastday[0].day.maxtemp_c+"°C <br>"
@@ -123,14 +133,19 @@ function get_weather()
                     + "Total Precipication: "+data.forecast.forecastday[0].day.totalprecip_mm+" mm <br>"
                     + "Humitidy: "+data.current.humidity+"%<br>"
                     + "<b>Rain</b><br>"
-                    + "Change of Rain: "+data.forecast.forecastday[0].day.daily_chance_of_rain+"% <br>"
+                    + "Chance of Rain: "+data.forecast.forecastday[0].day.daily_chance_of_rain+"% <br>"
                     + "<b>Snow</b><br>"
-                    + "Change of Snow: "+data.forecast.forecastday[0].day.daily_chance_of_snow+"% <br>");
+                    + "Chance of Snow: "+data.forecast.forecastday[0].day.daily_chance_of_snow+"% <br>");
 
                 wind = ("<b>Wind</b><br>"
                     + "Wind: "+data.current.wind_kph+" kph <br>"
                     + "Wind Direction: "+data.current.wind_dir+"<br>"
                     + "Degree: "+data.current.wind_degree+ "<br>");
+
+               hourTemp = ("<b>HOURLY</b><br>Temperature: "+data.forecast.forecastday[0].hour[0].temp_c+"°C <br>"
+                    + "Feels Like: "+data.forecast.forecastday[0].hour[0].feelslike_c+"°C <br>"
+                    + "Wind Chill: "+data.forecast.forecastday[0].hour[0].windchill_c+"°C <br>");
+
                 break;
             }
 
@@ -138,12 +153,14 @@ function get_weather()
         temp_output.innerHTML = `${temp}`; 
         precip_output.innerHTML = `${precip}`;
         wind_output.innerHTML =`${wind}`
-        update.innerHTML = `Last Updated: ${data.current.last_updated}<br>`;
+        update.innerHTML = `Last Updated: ${data.current.last_updated} in ${data.location.tz_id} timezone<br>`;
         cond_icon.src = `${icon}`;
+
+        hourlyTemp_output.innerHTML = `${hourTemp}`; 
     })
     .catch(function(err) {
         console.log('Fetch Error :-S', err);
-        let output = document.getElementById("weather_output");
+        let output = document.getElementById("tempurature_output");
         output.innerHTML = "Error: Unable to fetch weather data."; // Display an error message
     });
 }
