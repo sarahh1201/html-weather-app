@@ -18,9 +18,12 @@ function get_weather()
         let temp_output = document.getElementById("tempurature_output");
         let wind_precip_output = document.getElementById("wind_precip_output");
         let update = document.getElementById("update_output");
+        let cond_icon = document.getElementById("cond_icon");
 
+        // To be outputed 
         let loc = data.location.name+", "+data.location.region+", "+data.location.country;
         let cond = data.forecast.forecastday[0].day.condition.text+"<br>";
+        let icon = data.forecast.forecastday[0].day.condition.icon;
 
         // LOCAL TIME/DATE FUNCTION
         let timeLocalOutput = document.getElementById("local_time");
@@ -69,6 +72,11 @@ function get_weather()
                     + "High: "+data.forecast.forecastday[0].day.maxtemp_f+"°F <br>"
                     + "Low: "+data.forecast.forecastday[0].day.mintemp_f+"°F <br>"
                     + "Average: "+data.forecast.forecastday[0].day.avgtemp_f+"°F <br>");
+                precipWind = ("Precipication: "+data.current.precip_in+" in <br>"
+                    + "Wind: "+data.current.wind_mph+" mph <br>"
+                    + "Wind Direction: "+data.current.wind_dir+"<br>"
+                    + "Degree: "+data.current.wind_degree+ "<br>");
+                
                 break;
             case 'k':
                 temp = ("Temperature: "+((273.15+data.current.temp_c).toFixed(2))+"K <br>"
@@ -77,6 +85,10 @@ function get_weather()
                     + "High: "+((273.15+data.forecast.forecastday[0].day.maxtemp_c).toFixed(2))+"K <br>"
                     + "Low: "+((273.15+data.forecast.forecastday[0].day.mintemp_c).toFixed(2))+"K <br>"
                     + "Average: "+((273.15+data.forecast.forecastday[0].day.avgtemp_c).toFixed(2))+"K <br>");
+                precipWind = ("Precipication: "+data.current.precip_mm+" mm <br>"
+                    + "Wind: "+data.current.wind_kph+" kph <br>"
+                    + "Wind Direction: "+data.current.wind_dir+"<br>"
+                    + "Degree: "+data.current.wind_degree+ "<br>");
                 break;
             default:
                 temp = ("Temperature: "+data.current.temp_c+"°C <br>"
@@ -85,19 +97,20 @@ function get_weather()
                     + "High: "+data.forecast.forecastday[0].day.maxtemp_c+"°C <br>"
                     + "Low: "+data.forecast.forecastday[0].day.mintemp_c+"°C <br>"
                     + "Average: "+data.forecast.forecastday[0].day.avgtemp_c+"°C <br>");
+                precipWind = ("Precipication: "+data.current.precip_mm+" mm <br>"
+                    + "Wind: "+data.current.wind_kph+" kph <br>"
+                    + "Wind Direction: "+data.current.wind_dir+"<br>"
+                    + "Degree: "+data.current.wind_degree+ "<br>");
                 break;
             }
-
-
-        let precipWind_m = ("Precipication: "+data.current.precip_mm+" mm <br>"
-                        + "Wind: "+data.current.wind_kph+" kph <br>");
     
         let humid = ("Humitidy: "+data.current.humidity+"%<br>");
 
         //OUTPUTS
-        temp_output.innerHTML = ` ${temp}`; 
-        wind_precip_output.innerHTML = `${precipWind_m} <br>${humid}<br>`;
+        temp_output.innerHTML = `${temp}`; 
+        wind_precip_output.innerHTML = `${precipWind} <br>${humid}<br>`;
         update.innerHTML = `Last Updated: ${data.current.last_updated}<br>`;
+        cond_icon.src = `${icon}`;
     })
     .catch(function(err) {
         console.log('Fetch Error :-S', err);
