@@ -16,7 +16,8 @@ function get_weather()
 
         // Display the data on the webpage using backticks for template literals
         let temp_output = document.getElementById("tempurature_output");
-        let wind_precip_output = document.getElementById("wind_precip_output");
+        let precip_output = document.getElementById("precip_output");
+        let wind_output = document.getElementById("wind_output");
         let update = document.getElementById("update_output");
         let cond_icon = document.getElementById("cond_icon");
 
@@ -73,14 +74,15 @@ function get_weather()
                     + "Low: "+data.forecast.forecastday[0].day.mintemp_f+"°F <br>"
                     + "Average: "+data.forecast.forecastday[0].day.avgtemp_f+"°F <br>");
 
-                precipWind = ("Precipication: "+data.current.precip_in+" in <br>"
+                precip = ("Precipication: "+data.current.precip_in+" in <br>"
                     + "Total Precipication: "+data.forecast.forecastday[0].day.totalprecip_in+" in <br>"
                     + "Humitidy: "+data.current.humidity+"%<br>"
                     + "<b>Rain</b><br>"
                     + "Change of Rain: "+data.forecast.forecastday[0].day.daily_chance_of_rain+"% <br>"
                     + "<b>Snow</b><br>"
-                    + "Change of Snow: "+data.forecast.forecastday[0].day.daily_chance_of_snow+"% <br>"
-                    + "<b>Wind</b><br>"
+                    + "Change of Snow: "+data.forecast.forecastday[0].day.daily_chance_of_snow+"% <br>");
+
+                wind = ("<b>Wind</b><br>"
                     + "Wind: "+data.current.wind_mph+" mph <br>"
                     + "Wind Direction: "+data.current.wind_dir+"<br>"
                     + "Degree: "+data.current.wind_degree+ "<br>");
@@ -95,14 +97,15 @@ function get_weather()
                     + "Low: "+((273.15+data.forecast.forecastday[0].day.mintemp_c).toFixed(2))+"K <br>"
                     + "Average: "+((273.15+data.forecast.forecastday[0].day.avgtemp_c).toFixed(2))+"K <br>");
 
-                precipWind = ("Precipication: "+data.current.precip_mm+" mm <br>"
+                precip = ("Precipication: "+data.current.precip_mm+" mm <br>"
                     + "Total Precipication: "+data.forecast.forecastday[0].day.totalprecip_mm+" mm <br>"
                     + "Humitidy: "+data.current.humidity+"%<br>"
                     + "<b>Rain</b><br>"
                     + "Change of Rain: "+data.forecast.forecastday[0].day.daily_chance_of_rain+"% <br>"
                     + "<b>Snow</b><br>"
-                    + "Change of Snow: "+data.forecast.forecastday[0].day.daily_chance_of_snow+"% <br>"
-                    + "<b>Wind</b><br>"
+                    + "Change of Snow: "+data.forecast.forecastday[0].day.daily_chance_of_snow+"% <br>");
+                
+                wind = ("<b>Wind</b><br>"
                     + "Wind: "+data.current.wind_kph+" kph <br>"
                     + "Wind Direction: "+data.current.wind_dir+"<br>"
                     + "Degree: "+data.current.wind_degree+ "<br>");
@@ -116,14 +119,15 @@ function get_weather()
                     + "Low: "+data.forecast.forecastday[0].day.mintemp_c+"°C <br>"
                     + "Average: "+data.forecast.forecastday[0].day.avgtemp_c+"°C <br>");
 
-                precipWind = ("Precipication: "+data.current.precip_mm+" mm <br>"
+                precip = ("Precipication: "+data.current.precip_mm+" mm <br>"
                     + "Total Precipication: "+data.forecast.forecastday[0].day.totalprecip_mm+" mm <br>"
                     + "Humitidy: "+data.current.humidity+"%<br>"
                     + "<b>Rain</b><br>"
                     + "Change of Rain: "+data.forecast.forecastday[0].day.daily_chance_of_rain+"% <br>"
                     + "<b>Snow</b><br>"
-                    + "Change of Snow: "+data.forecast.forecastday[0].day.daily_chance_of_snow+"% <br>"
-                    + "<b>Wind</b><br>"
+                    + "Change of Snow: "+data.forecast.forecastday[0].day.daily_chance_of_snow+"% <br>");
+
+                wind = ("<b>Wind</b><br>"
                     + "Wind: "+data.current.wind_kph+" kph <br>"
                     + "Wind Direction: "+data.current.wind_dir+"<br>"
                     + "Degree: "+data.current.wind_degree+ "<br>");
@@ -132,7 +136,8 @@ function get_weather()
 
         //OUTPUTS
         temp_output.innerHTML = `${temp}`; 
-        wind_precip_output.innerHTML = `${precipWind}<br>`;
+        precip_output.innerHTML = `${precip}`;
+        wind_output.innerHTML =`${wind}`
         update.innerHTML = `Last Updated: ${data.current.last_updated}<br>`;
         cond_icon.src = `${icon}`;
     })
