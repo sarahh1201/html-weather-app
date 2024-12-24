@@ -52,4 +52,3 @@ if response.status_code == 200:
 else:
         print(f'Error: Unable to fetch data. HTTP Status code: {response.status_code}')
         
-print(weather_data)

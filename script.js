@@ -65,6 +65,22 @@ function get_weather()
                             ${precipWind_m} <br>
                             ${humid}<br>
                             ${lastUpdate} <br>`; 
+
+        const timezoneUrl = "http://worldtimeapi.org/api/timezone/"+data.location.tz_id;
+        let timeOutput = document.getElementById("time_output");
+        
+        fetch(timezoneUrl)
+        .then(function(timeNow) {
+            return timeNow.json(); // Parse the response body as JSON
+        })
+        .then(function(timeData) {
+            console.log(timeData); 
+            timeOutput.innerHTML = `<i>Local Time: ${timeData.datetime} </i>`;
+        })
+        .catch(function(err) {
+            console.log('Fetch Error :-S', err);
+            timeOutput.innerHTML = "Error: Unable to fetch local time."; // Display an error message
+        });
     })
     .catch(function(err) {
         console.log('Fetch Error :-S', err);
@@ -72,4 +88,3 @@ function get_weather()
         output.innerHTML = "Error: Unable to fetch weather data."; // Display an error message
     });
 }
-
