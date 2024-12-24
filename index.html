@@ -8,13 +8,15 @@
 
     </head>
     <body>
-        <section id="title">
+        <!--HEADER-->
+        <header>
             <h1>Welcome to Pocket Weather!</h1>
             <h3>🌦️🌧️⛈️</h3>
             <h3>Where would you like to know the weather?</h3>
-        </section>
+        </header>
 
-        <section id="configurations">
+        <!--SIDE BAR - WIP-->
+        <aside class = "aside">
             <input type="text" id="my_city" />
             <button type="button" id="my_button" onclick="get_weather()">Get Weather</button>
             <div id="output"></div>
@@ -26,21 +28,32 @@
             <option value="i">Fahrenheit</option>
             <option value="k">Kelvins</option>
             </select>
-        </section>
+        </aside>
 
-        <section id = "current_dateTime">
+        <!--YOUR TIME AND DATE-->
+        <section class = "current_dateTime">
             <div id="current_date">Loading...</div>
             <div id="current_time">Loading...</div>
         </section>
 
-        <section id = "local_dateTime">
+
+        <!--SEARCHED CITY TIME AND DATE-->
+        <section class = "local_dateTime">
+            <p><br></p>
             <div id="local_time"></div>
         </section>
 
-        <section>
-            <p id="weather_output"></p>
-            <p id="temperatureDisplay"></p>
+        <!--WEATHER OF LOCATION SEARCHED-->
+        <section class = "weather">
+            <div class="box">
+                <p id="tempurature_output"><b>Tempurature: </b></p>
+            </div>
+            <div class="box">
+                <p id="wind_precip_output"></p>
+            </div>
         </section>
+
+        <p id="update_output" style="text-align: left"></p>
 
         <script src="./script.js" ></script>
         <script src="./timefunction.js" ></script>

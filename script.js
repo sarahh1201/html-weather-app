@@ -15,10 +15,11 @@ function get_weather()
         console.log(data);  // Log the data to check it in the console
 
         // Display the data on the webpage using backticks for template literals
-        let output = document.getElementById("weather_output");
+        let temp_output = document.getElementById("tempurature_output");
+        let wind_precip_output = document.getElementById("wind_precip_output");
+        let update = document.getElementById("update_output");
 
         let loc = data.location.name+", "+data.location.region+", "+data.location.country;
-        let locTime = data.location.localtime;
         let cond = data.forecast.forecastday[0].day.condition.text+"<br>";
 
         // LOCAL TIME/DATE FUNCTION
@@ -46,7 +47,8 @@ function get_weather()
                     month: 'long',
                     day: 'numeric',
                 });
-                timeLocalOutput.innerHTML = `<b>${data.location.name}</b> <br>
+                timeLocalOutput.innerHTML = `<b>${loc}</b> <br>
+                                            ${cond} <br>
                                             Local Date: ${fLocalDate} <br><i>
                                             Local Time: ${fLocalTime} </i>`;
             })
@@ -92,16 +94,10 @@ function get_weather()
     
         let humid = ("Humitidy: "+data.current.humidity+"%<br>");
 
-
-        let lastUpdate = ("Last Updated: "+data.current.last_updated+"<br>");
-
-        output.innerHTML = `<b>${loc} </b><br>
-                            <i>${locTime} </i><br>
-                            ${cond} <br>
-                            ${temp} <br>
-                            ${precipWind_m} <br>
-                            ${humid}<br>
-                            ${lastUpdate} <br>`; 
+        //OUTPUTS
+        temp_output.innerHTML = ` ${temp}`; 
+        wind_precip_output.innerHTML = `${precipWind_m} <br>${humid}<br>`;
+        update.innerHTML = `Last Updated: ${data.current.last_updated}<br>`;
     })
     .catch(function(err) {
         console.log('Fetch Error :-S', err);

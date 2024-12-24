@@ -1,9 +1,15 @@
 body {
-    background-color: rgb(165, 192, 201);
+    background-color: hsl(195, 25%, 72%);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
     font-family: 'Times New Roman', Times, serif;
+
+    /* Spacings */
+    margin-left: 100px;
+    margin-right: 100px;
+    padding: 10px; /* Inside spacing */
+
 }
 
 h1 {
@@ -13,6 +19,17 @@ h1 {
 h3 {
     color: rgb(66, 109, 110);  
 }
-.weather_output {
-    text-align: left;
+
+.box {
+    padding: 20px;
+    background-color: #90acaf;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+.weather {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 20px;
+  }
