@@ -96,7 +96,7 @@ function get_weather()
                     + "Average: "+((273.15+data.forecast.forecastday[0].day.avgtemp_c).toFixed(2))+"K <br>");
 
                 precipWind = ("Precipication: "+data.current.precip_mm+" mm <br>"
-                    + "Total Precipication: "+data.forecast.forecastday[0].day.totalprecip_in+" in <br>"
+                    + "Total Precipication: "+data.forecast.forecastday[0].day.totalprecip_mm+" mm <br>"
                     + "Humitidy: "+data.current.humidity+"%<br>"
                     + "<b>Rain</b><br>"
                     + "Change of Rain: "+data.forecast.forecastday[0].day.daily_chance_of_rain+"% <br>"
@@ -117,7 +117,7 @@ function get_weather()
                     + "Average: "+data.forecast.forecastday[0].day.avgtemp_c+"°C <br>");
 
                 precipWind = ("Precipication: "+data.current.precip_mm+" mm <br>"
-                    + "Total Precipication: "+data.forecast.forecastday[0].day.totalprecip_in+" in <br>"
+                    + "Total Precipication: "+data.forecast.forecastday[0].day.totalprecip_mm+" mm <br>"
                     + "Humitidy: "+data.current.humidity+"%<br>"
                     + "<b>Rain</b><br>"
                     + "Change of Rain: "+data.forecast.forecastday[0].day.daily_chance_of_rain+"% <br>"
