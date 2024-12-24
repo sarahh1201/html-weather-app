@@ -13,3 +13,6 @@ h1 {
 h3 {
     color: rgb(66, 109, 110);  
 }
+.weather_output {
+    text-align: left;
+}

@@ -21,6 +21,43 @@ function get_weather()
         let locTime = data.location.localtime;
         let cond = data.forecast.forecastday[0].day.condition.text+"<br>";
 
+        // LOCAL TIME/DATE FUNCTION
+        let timeLocalOutput = document.getElementById("local_time");
+        const timezone = data.location.tz_id;
+        const timezoneUrl = "http://worldtimeapi.org/api/timezone/"+timezone;
+        function updateLocalTime(){
+        fetch(timezoneUrl)
+            .then(function(timeNow) {
+                return timeNow.json(); // Parse the response body as JSON
+            })
+            .then(function(tData) {
+                console.log(tData); 
+                const lDatetime = new Date(tData.datetime);
+                const fLocalTime = lDatetime.toLocaleTimeString('en-US', {
+                    timeZone: timezone,
+                    hour: '2-digit', 
+                    minute: '2-digit', 
+                    hour12: true
+                });
+                const fLocalDate = lDatetime.toLocaleDateString('en-US', {
+                    timeZone: timezone,
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                });
+                timeLocalOutput.innerHTML = `<b>${data.location.name}</b> <br>
+                                            Local Date: ${fLocalDate} <br><i>
+                                            Local Time: ${fLocalTime} </i>`;
+            })
+            .catch(function(err) {
+                console.log('Fetch Error :-S', err);
+                timeLocalOutput.innerHTML = "Error: Unable to fetch local time."; // Display an error message
+            });
+            }
+            updateLocalTime();
+            setInterval(updateTime, 60000); // Refresh the time every 60 seconds (60000 milliseconds)
+
         switch(units)
             {
             case 'i':
@@ -65,22 +102,6 @@ function get_weather()
                             ${precipWind_m} <br>
                             ${humid}<br>
                             ${lastUpdate} <br>`; 
-
-        const timezoneUrl = "http://worldtimeapi.org/api/timezone/"+data.location.tz_id;
-        let timeOutput = document.getElementById("time_output");
-        
-        fetch(timezoneUrl)
-        .then(function(timeNow) {
-            return timeNow.json(); // Parse the response body as JSON
-        })
-        .then(function(timeData) {
-            console.log(timeData); 
-            timeOutput.innerHTML = `<i>Local Time: ${timeData.datetime} </i>`;
-        })
-        .catch(function(err) {
-            console.log('Fetch Error :-S', err);
-            timeOutput.innerHTML = "Error: Unable to fetch local time."; // Display an error message
-        });
     })
     .catch(function(err) {
         console.log('Fetch Error :-S', err);

@@ -51,4 +51,8 @@ if response.status_code == 200:
                 
 else:
         print(f'Error: Unable to fetch data. HTTP Status code: {response.status_code}')
-        
+
+
+test = "http://worldtimeapi.org/api/timezone/America/Vancouver"
+testr = requests.get(test)
+print(testr.json())

@@ -5,31 +5,45 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Weather</title>
         <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://pyscript.net/snapshots/2024.9.2/core.css"/>
-    <script type="module" src="https://pyscript.net/snapshots/2024.9.2/core.js"></script>
 
     </head>
     <body>
-        <h1>Welcome to Pocket Weather!</h1>
-        <h3>🌦️🌧️⛈️</h3>
-        <h3>Where would you like to know the weather?</h3>
+        <section id="title">
+            <h1>Welcome to Pocket Weather!</h1>
+            <h3>🌦️🌧️⛈️</h3>
+            <h3>Where would you like to know the weather?</h3>
+        </section>
 
-        <input type="text" id="my_city" />
-        <button type="button" id="my_button" onclick="get_weather()">Get Weather</button>
-        <div id="output"></div>
-        
-        <label for="units">Tempurature Units:</label>
+        <section id="configurations">
+            <input type="text" id="my_city" />
+            <button type="button" id="my_button" onclick="get_weather()">Get Weather</button>
+            <div id="output"></div>
+            
+            <label for="units">Tempurature Units:</label>
 
-        <select name="units" id="units">
-        <option value="m">Celcius</option>
-        <option value="i">Fahrenheit</option>
-        <option value="k">Kelvins</option>
-        </select>
-        <p id="time_output"></p>
-        <p id="weather_output"></p>
-        <p id="temperatureDisplay"></p>
+            <select name="units" id="units">
+            <option value="m">Celcius</option>
+            <option value="i">Fahrenheit</option>
+            <option value="k">Kelvins</option>
+            </select>
+        </section>
+
+        <section id = "current_dateTime">
+            <div id="current_date">Loading...</div>
+            <div id="current_time">Loading...</div>
+        </section>
+
+        <section id = "local_dateTime">
+            <div id="local_time"></div>
+        </section>
+
+        <section>
+            <p id="weather_output"></p>
+            <p id="temperatureDisplay"></p>
+        </section>
 
         <script src="./script.js" ></script>
+        <script src="./timefunction.js" ></script>
 
     </body>
 </html>
