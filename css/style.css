@@ -1,0 +1,78 @@
+/* GENERAL SETTINGS */
+body {
+    background-color: hsl(195, 25%, 72%);
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* NAVIGATION BAR - START*/
+.nav { /* Bar itself */
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    background-color: rgb(27, 50, 56);
+    color: #c0c0c0;
+    font-family: 'Times New Roman', Times, serif;
+    align-items: center;
+
+}
+.nav .right { /* Search + Button */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding-right: 10px;
+}
+.city_search { /* Search Bar */
+    background-color:#e1eaeb;
+    width: 350px; 
+    border-radius: 15px; 
+    padding: 5px; 
+    border: 1px solid #ccc;
+}
+.get_weather { /* Button */
+    background-color:#e1eaeb;
+    color: rgb(13, 37, 38);
+    border-radius: 15px; 
+    padding: 5px; 
+    border: 1px solid #ccc;
+}
+.select_unit { /* Dropdown */
+    width: 150px; 
+    padding: 5px; 
+    border-radius: 5px; 
+    border: 1px solid #ccc; 
+    background-color:#e1eaeb;
+    color: rgb(13, 37, 38);
+}
+/* NAVIGATION BAR - END */
+
+
+/* MAIN HEADINGS */
+h1 {
+    color: rgb(13, 37, 38);
+}
+h3 {
+    color: rgb(66, 109, 110);  
+}
+
+/* REST OF BODY SETTINGS */
+.page {
+    /* Spacings */
+    margin-left: 100px;
+    margin-right: 100px;
+    padding: 10px; /* Inside spacing */
+}
+.box {
+    padding: 20px;
+    background-color: #90acaf;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.weather {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 20px;
+  }

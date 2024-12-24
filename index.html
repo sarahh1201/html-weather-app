@@ -4,38 +4,44 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Weather</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/style.css">
 
     </head>
     <body>
+        <!--NAV BAR - WIP-->
+        <nav class = "nav">    
+            <!--Dropdown-->
+            <div>
+                <label for="units" >Units:</label>
+                <select name="units" id="units" class="select_unit">
+                <option value="m" >Metric</option>
+                <option value="i">Imperial</option>
+                <option value="k">Kelvins</option>
+                </select>
+            </div>
+
+            <!--City Search-->
+            <div class="right">
+                <input type="text" id="my_city" placeholder="Enter city name" class="city_search"/>
+                <button type="button" id="my_button" onclick="get_weather()" class="get_weather">Get Weather</button>
+            </div>
+        </nav>
+       
         <!--HEADER-->
         <header>
             <h1>Welcome to Pocket Weather!</h1>
             <h3>🌦️🌧️⛈️</h3>
             <h3>Where would you like to know the weather?</h3>
         </header>
-
-        <!--SIDE BAR - WIP-->
-        <aside class = "aside">
-            <input type="text" id="my_city" />
-            <button type="button" id="my_button" onclick="get_weather()">Get Weather</button>
-            <div id="output"></div>
-            
-            <label for="units">Tempurature Units:</label>
-
-            <select name="units" id="units">
-            <option value="m">Celcius</option>
-            <option value="i">Fahrenheit</option>
-            <option value="k">Kelvins</option>
-            </select>
-        </aside>
-
+        
+        <page>
         <!--YOUR TIME AND DATE-->
         <section class = "current_dateTime">
             <div id="current_date">Loading...</div>
             <div id="current_time">Loading...</div>
         </section>
-
+        <img src="https://i.pinimg.com/originals/32/81/cd/3281cde8840b5d5bdea9cb6a02d851b1.gif">
+        <img src="https://media2.giphy.com/media/26vIfmfSwsxxz9dEk/giphy.gif?cid=6c09b952qr81mle2tpokega2yl92nr20v40tn6zc4zxtk725&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g">
 
         <!--SEARCHED CITY TIME AND DATE-->
         <section class = "local_dateTime">
@@ -55,8 +61,9 @@
 
         <p id="update_output" style="text-align: left"></p>
 
-        <script src="./script.js" ></script>
-        <script src="./timefunction.js" ></script>
+        <script src="scripts/script.js" ></script>
+        <script src="scripts/timefunction.js" ></script>
+    </page>
 
     </body>
 </html>
