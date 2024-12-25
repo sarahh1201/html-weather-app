@@ -25,7 +25,7 @@
                 <button type="button" id="my_button" onclick="get_weather()" class="get_weather">Get Weather</button>
             </div>
         </nav>
-        <img src="https://cdn.discordapp.com/attachments/1277119621807476759/1321023005882716181/image.png?ex=676bba0c&is=676a688c&hm=c5b0e461a0da3e3be8de8dcdb2f1c98295a92ec67ff4877fef8fa554a3130bfb&" class="styled-image">
+        <img src="images/cloud.jpg" class="styled-image">
        
         <!--HEADER-->
         <header class = "heading">
@@ -34,39 +34,38 @@
             <h3>Where would you like to know the weather?</h3>
         </header>
         
-        <page>
+        <!--START OF PAGE-->
+        <div class="page">
+            
         <!--YOUR TIME AND DATE-->
         <section class = "current_dateTime">
             <div id="current_date">Loading...</div>
             <div id="current_time">Loading...</div>
         </section>
 
-        <!--SEARCHED CITY TIME AND DATE-->
-        <section class = "local_dateTime">
-            <p><br></p>
-            <div id="local_time"></div>
-        </section>
-
         <!--WEATHER RESULTS-->
+
+        <!--FIRST ROW-->
         <section class = "weather">
             <div class="box">
                 <img id="cond_icon">
+                <p id="local_time"></p>
+            </div>
+            <div class="box">
                 <p id="tempurature_output"></p>
             </div>
+            <div class="box">
+                <p id="Hourlytempurature_output"></p>
+            </div>
+        </section>
+
+        <!--SECOND ROW-->
+        <section class = "weather">
             <div class="box">
                 <p id="precip_output"></p>
             </div>
             <div class="box">
                 <p id="wind_output"></p>
-            </div>
-        </section>
-
-        <section class = "weather">
-            <div class="box">
-                <p id="Hourlytempurature_output"></p>
-            </div>
-            <div class="box">
-                <p id="empty"></p>
             </div>
             <div class="box">
                 <p id="empty"></p>
@@ -75,9 +74,10 @@
 
         <p id="update_output" style="text-align: left; padding: 10px;"></p>
 
+        <!--SCRIPTS-->
         <script src="scripts/script.js" ></script>
         <script src="scripts/timefunction.js" ></script>
-    </page>
+    </div>
 
     </body>
 </html>
