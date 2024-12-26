@@ -16,12 +16,13 @@ function get_weather()
 
         // Display the data on the webpage using backticks for template literals
         let temp_output = document.getElementById("tempurature_output");
+        let tomorrow_output = document.getElementById("tomorrow_output")
         let precip_output = document.getElementById("precip_output");
         let wind_output = document.getElementById("wind_output");
         let update = document.getElementById("update_output");
         let cond_icon = document.getElementById("cond_icon");
 
-        let hourlyTemp_output = document.getElementById("Hourlytempurature_output")
+        let nowTemp_output = document.getElementById("Nowtempurature_output")
 
         // To be outputed 
         let loc = data.location.name+", "+data.location.region+", "+data.location.country;
@@ -76,6 +77,10 @@ function get_weather()
                     + "Low: "+data.forecast.forecastday[0].day.mintemp_f+"°F <br>"
                     + "Average: "+data.forecast.forecastday[0].day.avgtemp_f+"°F <br>");
 
+                tempTomorrow = ("<b>TOMORROW</b><br>High: "+data.forecast.forecastday[1].day.maxtemp_f+"°F <br>"
+                        + "Low: "+data.forecast.forecastday[1].day.mintemp_f+"°F <br>"
+                        + "Average: "+data.forecast.forecastday[1].day.avgtemp_f+"°F <br>");
+
                 precip = ("Precipication: "+data.current.precip_in+" in <br>"
                     + "Total Precipication: "+data.forecast.forecastday[0].day.totalprecip_in+" in <br>"
                     + "Humitidy: "+data.current.humidity+"%<br>"
@@ -89,7 +94,7 @@ function get_weather()
                     + "Wind Direction: "+data.current.wind_dir+"<br>"
                     + "Degree: "+data.current.wind_degree+ "<br>");
 
-                hourTemp = ("<b>HOURLY</b><br>Temperature: "+data.forecast.forecastday[0].hour[0].temp_f+"°F <br>"
+                nowTemp = ("<b>NOW</b><br>Temperature: "+data.forecast.forecastday[0].hour[0].temp_f+"°F <br>"
                     + "Feels Like: "+data.forecast.forecastday[0].hour[0].feelslike_f+"°F <br>"
                     + "Wind Chill: "+data.forecast.forecastday[0].hour[0].windchill_f+"°F <br>");
                 
@@ -102,6 +107,11 @@ function get_weather()
                     + "High: "+((273.15+data.forecast.forecastday[0].day.maxtemp_c).toFixed(2))+"K <br>"
                     + "Low: "+((273.15+data.forecast.forecastday[0].day.mintemp_c).toFixed(2))+"K <br>"
                     + "Average: "+((273.15+data.forecast.forecastday[0].day.avgtemp_c).toFixed(2))+"K <br>");
+
+                tempTomorrow = ("<b>TODAY</b><br>High: "+((273.15+data.forecast.forecastday[1].day.maxtemp_c).toFixed(2))+"K <br>"
+                    + "Low: "+((273.15+data.forecast.forecastday[1].day.mintemp_c).toFixed(2))+"K <br>"
+                    + "Average: "+((273.15+data.forecast.forecastday[1].day.avgtemp_c).toFixed(2))+"K <br>");
+
 
                 precip = ("Precipication: "+data.current.precip_mm+" mm <br>"
                     + "Total Precipication: "+data.forecast.forecastday[0].day.totalprecip_mm+" mm <br>"
@@ -116,7 +126,7 @@ function get_weather()
                     + "Wind Direction: "+data.current.wind_dir+"<br>"
                     + "Degree: "+data.current.wind_degree+ "<br>");
                     
-                hourTemp = ("<b>HOURLY</b><br>Temperature: "+((273.15+data.forecast.forecastday[0].hour[0].temp_c).toFixed(2))+"K <br>"
+                nowTemp = ("<b>NOW</b><br>Temperature: "+((273.15+data.forecast.forecastday[0].hour[0].temp_c).toFixed(2))+"K <br>"
                     + "Feels Like: "+((273.15+data.forecast.forecastday[0].hour[0].feelslike_c).toFixed(2))+"K <br>"
                     + "Wind Chill: "+((273.15+data.forecast.forecastday[0].hour[0].windchill_c).toFixed(2))+"K <br>");
                 break;
@@ -126,6 +136,10 @@ function get_weather()
                     + "Feels Like: "+data.current.feelslike_c+"°C <br>"
                     + "Wind Chill: "+data.current.windchill_c+"°C <br>"
                     + "High: "+data.forecast.forecastday[0].day.maxtemp_c+"°C <br>"
+                    + "Low: "+data.forecast.forecastday[0].day.mintemp_c+"°C <br>"
+                    + "Average: "+data.forecast.forecastday[0].day.avgtemp_c+"°C <br>");
+
+                tempTomorrow = ("<b>TOMORROW</b><br>High: "+data.forecast.forecastday[0].day.maxtemp_c+"°C <br>"
                     + "Low: "+data.forecast.forecastday[0].day.mintemp_c+"°C <br>"
                     + "Average: "+data.forecast.forecastday[0].day.avgtemp_c+"°C <br>");
 
@@ -142,7 +156,7 @@ function get_weather()
                     + "Wind Direction: "+data.current.wind_dir+"<br>"
                     + "Degree: "+data.current.wind_degree+ "<br>");
 
-               hourTemp = ("<b>HOURLY</b><br>Temperature: "+data.forecast.forecastday[0].hour[0].temp_c+"°C <br>"
+                nowTemp = ("<b>NOW</b><br>Temperature: "+data.forecast.forecastday[0].hour[0].temp_c+"°C <br>"
                     + "Feels Like: "+data.forecast.forecastday[0].hour[0].feelslike_c+"°C <br>"
                     + "Wind Chill: "+data.forecast.forecastday[0].hour[0].windchill_c+"°C <br>");
 
@@ -151,12 +165,14 @@ function get_weather()
 
         //OUTPUTS
         temp_output.innerHTML = `${temp}`; 
+        tomorrow_output.innerHTML = tempTomorrow
+
         precip_output.innerHTML = `${precip}`;
         wind_output.innerHTML =`${wind}`
         update.innerHTML = `Last Updated: ${data.current.last_updated} in ${data.location.tz_id} timezone<br>`;
         cond_icon.src = `${icon}`;
 
-        hourlyTemp_output.innerHTML = `${hourTemp}`; 
+        nowTemp_output.innerHTML = `${nowTemp}`; 
     })
     .catch(function(err) {
         console.log('Fetch Error :-S', err);
