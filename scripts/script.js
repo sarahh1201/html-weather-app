@@ -5,7 +5,7 @@ function get_weather()
     let units = select_units.value;
     
     const api_key = 'b2273b21514c4decb2b45606240806';  // API key from weatherapi.com
-    const url = "http://api.weatherapi.com/v1/forecast.json?key="+api_key+"&q="+city; 
+    const url = "http://api.weatherapi.com/v1/forecast.json?key="+api_key+"&q="+city+"&days=2"; 
 
     fetch(url)
     .then(function(response) {
@@ -139,9 +139,9 @@ function get_weather()
                     + "Low: "+data.forecast.forecastday[0].day.mintemp_c+"°C <br>"
                     + "Average: "+data.forecast.forecastday[0].day.avgtemp_c+"°C <br>");
 
-                tempTomorrow = ("<b>TOMORROW</b><br>High: "+data.forecast.forecastday[0].day.maxtemp_c+"°C <br>"
-                    + "Low: "+data.forecast.forecastday[0].day.mintemp_c+"°C <br>"
-                    + "Average: "+data.forecast.forecastday[0].day.avgtemp_c+"°C <br>");
+                tempTomorrow = ("<b>TOMORROW</b><br>High: "+data.forecast.forecastday[1].day.maxtemp_c+"°C <br>"
+                    + "Low: "+data.forecast.forecastday[1].day.mintemp_c+"°C <br>"
+                    + "Average: "+data.forecast.forecastday[1].day.avgtemp_c+"°C <br>");
 
                 precip = ("Precipication: "+data.current.precip_mm+" mm <br>"
                     + "Total Precipication: "+data.forecast.forecastday[0].day.totalprecip_mm+" mm <br>"
