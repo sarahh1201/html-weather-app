@@ -202,7 +202,7 @@ function get_tomorrow()
         let icon = data.forecast.forecastday[2].day.condition.icon;
 
         // LOCAL TIME/DATE FUNCTION
-        const forecastDay = new Date(data.forecast.forecastday[1].date);
+        const forecastDay = new Date(data.forecast.forecastday[2].date);
         const afterDate = forecastDay.toLocaleDateString('en-US', {
             weekday: 'short',
         });
@@ -264,7 +264,7 @@ function get_after()
         let icon = data.forecast.forecastday[2].day.condition.icon;
 
         // LOCAL TIME/DATE FUNCTION
-        const forecastDay = new Date(data.forecast.forecastday[2].date);
+        const forecastDay = new Date(data.forecast.forecastday[3].date);
         const afterDate = forecastDay.toLocaleDateString('en-US', {
             weekday: 'short',
         });
