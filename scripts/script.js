@@ -74,8 +74,6 @@ function get_today()
 
         // Display the data on the webpage using backticks for template literals
         let temp_output = document.getElementById("tempurature_output");
-        let precip_output = document.getElementById("precip_output");
-        let wind_output = document.getElementById("wind_output");
         let update = document.getElementById("update_output");
         let cond_icon = document.getElementById("cond_icon");
 
@@ -235,7 +233,7 @@ function get_tomorrow()
     })
     .catch(function(err) {
         console.log('Fetch Error :-S', err);
-        let output = document.getElementById("tempurature_output");
+        let output = document.getElementById("tomorrow_output");
         output.innerHTML = "Error: Unable to fetch weather data."; // Display an error message
     });
 }
@@ -247,7 +245,7 @@ function get_after()
     let units = select_units.value;
 
     const api_key = 'b2273b21514c4decb2b45606240806';  // API key from weatherapi.com
-    const url = "https://api.weatherapi.com/v1/forecast.json?key="+api_key+"&q="+city+"&days=3"; 
+    const url = "https://api.weatherapi.com/v1/forecast.json?key="+api_key+"&q="+city+"&days=4"; 
 
     fetch(url)
     .then(function(response) {
@@ -297,7 +295,7 @@ function get_after()
     })
     .catch(function(err) {
         console.log('Fetch Error :-S', err);
-        let output = document.getElementById("tempurature_output");
+        let output = document.getElementById("day_after_output");
         output.innerHTML = "Error: Unable to fetch weather data."; // Display an error message
     });
 }
