@@ -81,6 +81,11 @@ function get_today()
 
         // To be outputed 
         let icon = data.forecast.forecastday[0].day.condition.icon;
+        const forecastDay = new Date(data.forecast.forecastday[0].date);
+        const afterDate = forecastDay.toLocaleDateString('en-US', {
+            weekday: 'short',
+        });
+        date = afterDate.toUpperCase();
 
 
         switch(units)
@@ -139,7 +144,7 @@ function get_today()
                 break;
 
             default:
-                temp = ("<b>TODAY</b><br>Temperature: "+data.current.temp_c+"°C <br>"
+                temp = ("<b>"+date+"</b><br>Temperature: "+data.current.temp_c+"°C <br>"
                     + "Feels Like: "+data.current.feelslike_c+"°C <br>"
                     + "Wind Chill: "+data.current.windchill_c+"°C <br>"
                     + "High: "+data.forecast.forecastday[0].day.maxtemp_c+"°C <br>"
@@ -197,10 +202,10 @@ function get_tomorrow()
         let tomicon = document.getElementById("tomicon");
 
         // To be outputed 
-        let icon = data.forecast.forecastday[2].day.condition.icon;
+        let icon = data.forecast.forecastday[1].day.condition.icon;
 
         // LOCAL TIME/DATE FUNCTION
-        const forecastDay = new Date(data.forecast.forecastday[2].date);
+        const forecastDay = new Date(data.forecast.forecastday[1].date);
         const afterDate = forecastDay.toLocaleDateString('en-US', {
             weekday: 'short',
         });
@@ -262,7 +267,7 @@ function get_after()
         let icon = data.forecast.forecastday[2].day.condition.icon;
 
         // LOCAL TIME/DATE FUNCTION
-        const forecastDay = new Date(data.forecast.forecastday[3].date);
+        const forecastDay = new Date(data.forecast.forecastday[2].date);
         const afterDate = forecastDay.toLocaleDateString('en-US', {
             weekday: 'short',
         });
