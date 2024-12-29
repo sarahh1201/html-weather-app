@@ -40,7 +40,7 @@ function get_time()
                     month: 'long',
                     day: 'numeric',
                 });
-                timeLocalOutput.innerHTML = `<b>${loc}</b> <br>
+                timeLocalOutput.innerHTML = `<h4>${loc}</h4>
                                             ${cond} <br>
                                             Local Date: ${fLocalDate} <br><i>
                                             Local Time: ${fLocalTime} </i>`;
@@ -85,7 +85,7 @@ function get_today()
         switch(units)
             {
             case 'i':
-                temp = ("<b>TODAY</b><br>Temperature: "+data.current.temp_f+"°F <br>"
+                temp = ("<h3>TODAY</h3><hr><br>Temperature: "+data.current.temp_f+"°F <br>"
                     + "Feels Like: "+data.current.feelslike_f+"°F <br>"
                     + "Wind Chill: "+data.current.windchill_f+"°F <br>"
                     + "High: "+data.forecast.forecastday[0].day.maxtemp_f+"°F <br>"
@@ -112,7 +112,7 @@ function get_today()
                 break;
 
             case 'k':
-                temp = ("<b>TODAY</b><br>Temperature: "+((273.15+data.current.temp_c).toFixed(2))+"K <br>"
+                temp = ("<h3>TODAY</h3><hr><br>Temperature: "+((273.15+data.current.temp_c).toFixed(2))+"K <br>"
                     + "Feels Like: "+((273.15+data.current.feelslike_c).toFixed(2))+"K <br>"
                     + "Wind Chill: "+((273.15+data.current.windchill_c).toFixed(2))+"K <br>"
                     + "High: "+((273.15+data.forecast.forecastday[0].day.maxtemp_c).toFixed(2))+"K <br>"
@@ -138,7 +138,7 @@ function get_today()
                 break;
 
             default:
-                temp = ("<b>TODAY</b><br>Temperature: "+data.current.temp_c+"°C <br>"
+                temp = ("<h3>TODAY</h3><hr><br>Temperature: "+data.current.temp_c+"°C <br>"
                     + "Feels Like: "+data.current.feelslike_c+"°C <br>"
                     + "Wind Chill: "+data.current.windchill_c+"°C <br>"
                     + "High: "+data.forecast.forecastday[0].day.maxtemp_c+"°C <br>"
@@ -210,19 +210,19 @@ function get_tomorrow()
         switch(units)
             {
             case 'i':
-                tempTomorrow = ("<b>"+date+"</b><br>High: "+data.forecast.forecastday[1].day.maxtemp_f+"°F <br>"
+                tempTomorrow = ("<h3>"+date+"</h3><hr><br>High: "+data.forecast.forecastday[1].day.maxtemp_f+"°F <br>"
                     + "Low: "+data.forecast.forecastday[1].day.mintemp_f+"°F <br>"
                     + "Average: "+data.forecast.forecastday[1].day.avgtemp_f+"°F <br>");
                 break;
 
             case 'k':
-                tempTomorrow = ("<b>"+date+"</b><br>High: "+((273.15+data.forecast.forecastday[1].day.maxtemp_c).toFixed(2))+"K <br>"
+                tempTomorrow = ("<h3>"+date+"</h3><hr><br>High: "+((273.15+data.forecast.forecastday[1].day.maxtemp_c).toFixed(2))+"K <br>"
                     + "Low: "+((273.15+ddata.forecast.forecastday[1].day.mintemp_c).toFixed(2))+"K <br>"
                     + "Average: "+((273.15+ddata.forecast.forecastday[1].day.avgtemp_c).toFixed(2))+"K <br>");
                 break;
 
             default:
-                tempTomorrow = ("<b>"+date+"</b><br>High: "+data.forecast.forecastday[1].day.maxtemp_c+"°C <br>"
+                tempTomorrow = ("<h3>"+date+"</h3><hr><br>High: "+data.forecast.forecastday[1].day.maxtemp_c+"°C <br>"
                     + "Low: "+data.forecast.forecastday[1].day.mintemp_c+"°C <br>"
                     + "Average: "+data.forecast.forecastday[1].day.avgtemp_c+"°C <br>");
                 break;
@@ -274,19 +274,19 @@ function get_after()
         switch(units)
             {
             case 'i':
-                tempDate = ("<b>"+date+"</b><br>High: "+data.forecast.forecastday[2].day.maxtemp_f+"°F <br>"
+                tempDate = ("<h3>"+date+"</h3><hr><br>High: "+data.forecast.forecastday[2].day.maxtemp_f+"°F <br>"
                     + "Low: "+data.forecast.forecastday[2].day.mintemp_f+"°F <br>"
                     + "Average: "+data.forecast.forecastday[2].day.avgtemp_f+"°F <br>");
                 break;
 
             case 'k':
-                tempDate = ("<b>"+date+"</b><br>High: "+((273.15+data.forecast.forecastday[2].day.maxtemp_c).toFixed(2))+"K <br>"
+                tempDate = ("<h3>"+date+"</h3><hr><br>High: "+((273.15+data.forecast.forecastday[2].day.maxtemp_c).toFixed(2))+"K <br>"
                     + "Low: "+((273.15+ddata.forecast.forecastday[2].day.mintemp_c).toFixed(2))+"K <br>"
                     + "Average: "+((273.15+ddata.forecast.forecastday[2].day.avgtemp_c).toFixed(2))+"K <br>");
                 break;
 
             default:
-                tempDate = ("<b>"+date+"</b><br>High: "+data.forecast.forecastday[2].day.maxtemp_c+"°C <br>"
+                tempDate = ("<h3>"+date+"</h3><hr><br>High: "+data.forecast.forecastday[2].day.maxtemp_c+"°C <br>"
                     + "Low: "+data.forecast.forecastday[2].day.mintemp_c+"°C <br>"
                     + "Average: "+data.forecast.forecastday[2].day.avgtemp_c+"°C <br>");
                 break;
@@ -303,9 +303,45 @@ function get_after()
     });
 }
 
+function get_astro()
+{
+    var city = document.getElementById("my_city").value;
+
+    const api_key = 'b2273b21514c4decb2b45606240806';  // API key from weatherapi.com
+    const url = "https://api.weatherapi.com/v1/forecast.json?key="+api_key+"&q="+city+"&days=3"; 
+    
+    fetch(url)
+    .then(function(response) {
+        return response.json(); // Parse the response body as JSON
+    })
+    .then(function(data) {
+        console.log(data);  // Log the data to check it in the console
+
+        // Display the data on the webpage using backticks for template literals
+        let astro_output = document.getElementById("astro_output");
+
+        // To be outputed 
+        let sunrise = data.forecast.forecastday[0].astro.sunrise;
+        let sunset = data.forecast.forecastday[0].astro.sunset;
+        let moonrise = data.forecast.forecastday[0].astro.moonrise;
+        let moonset = data.forecast.forecastday[0].astro.moonset;
+        let moonphase = data.forecast.forecastday[0].astro.moon_phase;
+
+
+        //OUTPUTS
+        astro_output.innerHTML = `<b>ASTRONOMY</b><br>Sunrise: ${sunrise} <br> 
+                                        Sunset: ${sunset} <br> 
+                                        Moonrise: ${moonrise} <br> 
+                                        Moonset: ${moonset} <br> 
+                                        Moon Phase: ${moonphase} <br>`; 
+    })
+
+}
+
 function main()
 {
     get_time();
+    get_astro();
     get_today();
     get_tomorrow();
     get_after();
