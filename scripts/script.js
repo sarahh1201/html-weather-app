@@ -32,7 +32,7 @@ function get_weather()
         // LOCAL TIME/DATE FUNCTION
         let timeLocalOutput = document.getElementById("local_time");
         const timezone = data.location.tz_id;
-        const timezoneUrl = "http://worldtimeapi.org/api/timezone/"+timezone;
+        const timezoneUrl = "https://worldtimeapi.org/api/timezone/"+timezone;
         function updateLocalTime(){
         fetch(timezoneUrl)
             .then(function(timeNow) {
