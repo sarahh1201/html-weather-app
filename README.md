@@ -10,6 +10,8 @@
   - 2 day forecast temp 
 - Wind
 - Precipitation
-- Fahrenheit, celcius and kelvins 
+- Fahrenheit, celcius and kelvins
+
+---
 
 <a href="https://html-weather-app.onrender.com">Weather App Link</a>
