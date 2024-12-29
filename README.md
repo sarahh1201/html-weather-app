@@ -2,8 +2,6 @@
 
 ## Weather App
 
----
-
 ### Features 
 - Diplays time of searched city
 - Tempurature
