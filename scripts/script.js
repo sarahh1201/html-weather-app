@@ -108,10 +108,9 @@ function get_weather()
                     + "Low: "+((273.15+data.forecast.forecastday[0].day.mintemp_c).toFixed(2))+"K <br>"
                     + "Average: "+((273.15+data.forecast.forecastday[0].day.avgtemp_c).toFixed(2))+"K <br>");
 
-                tempTomorrow = ("<b>TODAY</b><br>High: "+((273.15+data.forecast.forecastday[1].day.maxtemp_c).toFixed(2))+"K <br>"
+                tempTomorrow = ("<b>TOMORROW</b><br>High: "+((273.15+data.forecast.forecastday[1].day.maxtemp_c).toFixed(2))+"K <br>"
                     + "Low: "+((273.15+data.forecast.forecastday[1].day.mintemp_c).toFixed(2))+"K <br>"
                     + "Average: "+((273.15+data.forecast.forecastday[1].day.avgtemp_c).toFixed(2))+"K <br>");
-
 
                 precip = ("Precipication: "+data.current.precip_mm+" mm <br>"
                     + "Total Precipication: "+data.forecast.forecastday[0].day.totalprecip_mm+" mm <br>"
@@ -164,7 +163,7 @@ function get_weather()
             }
 
         //OUTPUTS
-        temp_output.innerHTML = `${temp}`; 
+        temp_output.innerHTML = temp; 
         tomorrow_output.innerHTML = tempTomorrow
 
         precip_output.innerHTML = `${precip}`;
@@ -174,9 +173,88 @@ function get_weather()
 
         nowTemp_output.innerHTML = `${nowTemp}`; 
     })
+
+}
+
+function get_after()
+{
+    var city = document.getElementById("my_city").value;
+    const select_units = document.getElementById("units");
+    let units = select_units.value;
+    
+    const api_key = 'b2273b21514c4decb2b45606240806';  // API key from weatherapi.com
+    const url = "http://api.weatherapi.com/v1/forecast.json?key="+api_key+"&q="+city+"&days=2"; 
+
+    fetch(url)
+    .then(function(response) {
+        return response.json(); // Parse the response body as JSON
+    })
+    .then(function(data) {
+        console.log(data);  // Log the data to check it in the console
+
+        // Display the data on the webpage using backticks for template literals
+        let day_after_output = document.getElementById("day_after_output")
+        let aftericon = document.getElementById("aftericon");
+
+        // To be outputed 
+        let icon = data.forecast.forecastday[2].day.condition.icon;
+
+        // LOCAL TIME/DATE FUNCTION
+        const timezone = data.forecast.forecastday.date;
+        const timezoneUrl = "http://worldtimeapi.org/api/timezone/"+timezone;
+        fetch(timezoneUrl)
+            .then(function(timeNow) {
+                return timeNow.json(); // Parse the response body as JSON
+            })
+            .then(function(tData) {
+                console.log(tData); 
+                const lDatetime = new Date(tData.datetime);
+                const fLocalDate = lDatetime.toLocaleDateString('en-US', {
+                    timeZone: timezone,
+                    weekday: 'short',
+
+                });
+                date = fLocalDate;
+            })
+            .catch(function(err) {
+                console.log('Fetch Error :-S', err);
+                date = "Error: Unable to fetch local time."; // Display an error message
+            });
+        
+        switch(units)
+            {
+            case 'i':
+                tempDate = ("<b>"+date+"</b><br>High: "+data.forecast.forecastday[2].day.maxtemp_f+"°F <br>"
+                    + "Low: "+data.forecast.forecastday[2].day.mintemp_f+"°F <br>"
+                    + "Average: "+data.forecast.forecastday[2].day.avgtemp_f+"°F <br>");
+                break;
+
+            case 'k':
+                tempDate = ("<b>"+date+"</b><br>High: "+((273.15+ddata.forecast.forecastday[2].day.maxtemp_c).toFixed(2))+"K <br>"
+                    + "Low: "+((273.15+ddata.forecast.forecastday[2].day.mintemp_c).toFixed(2))+"K <br>"
+                    + "Average: "+((273.15+ddata.forecast.forecastday[2].day.avgtemp_c).toFixed(2))+"K <br>");
+                break;
+
+            default:
+                tempDate = ("<b>"+date+"</b><br>High: "+data.forecast.forecastday[2].day.maxtemp_c+"°C <br>"
+                    + "Low: "+data.forecast.forecastday[2].day.mintemp_c+"°C <br>"
+                    + "Average: "+data.forecast.forecastday[2].day.avgtemp_c+"°C <br>");
+                break;
+            }
+
+        //OUTPUTS
+        day_after_output.innerHTML = tempDate;
+        aftericon.src = `${icon}`;
+    })
     .catch(function(err) {
         console.log('Fetch Error :-S', err);
         let output = document.getElementById("tempurature_output");
         output.innerHTML = "Error: Unable to fetch weather data."; // Display an error message
     });
+}
+
+function main()
+{
+    get_weather();
+    get_after();
 }
