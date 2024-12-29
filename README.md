@@ -1,4 +1,5 @@
 <img src = "images/cloud.jpg">
+
 ## Weather App
 
 ---
