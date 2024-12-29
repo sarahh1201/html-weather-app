@@ -8,6 +8,13 @@ body {
     display: flex;
     flex-direction: column;
 }
+hr {
+    border: none;
+    height: 2px;
+    background-color: #516f72; /* Line color */
+    margin: 20px 0; /* Space around the line */
+  }
+
 
 /* NAVIGATION BAR - START*/
 .nav { /* Bar itself */
@@ -89,10 +96,9 @@ h3 {
 .weather {
 
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
     text-align:justify;
     justify-content: center;
-
   }
 
 /* FOOTER - START */
