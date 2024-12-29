@@ -1,12 +1,12 @@
 function get_weather()
 {
     var city = document.getElementById("my_city").value;
-    const select_units = document.getElementById("units");
+    const select_units = document.getElementById("units");  
     let units = select_units.value;
-    
-    const api_key = 'b2273b21514c4decb2b45606240806';  // API key from weatherapi.com
-    const url = "http://api.weatherapi.com/v1/forecast.json?key="+api_key+"&q="+city+"&days=2"; 
 
+    const api_key = 'b2273b21514c4decb2b45606240806';  // API key from weatherapi.com
+    const url = "https://api.weatherapi.com/v1/forecast.json?key="+api_key+"&q="+city+"&days=3"; 
+    
     fetch(url)
     .then(function(response) {
         return response.json(); // Parse the response body as JSON
@@ -65,7 +65,7 @@ function get_weather()
             });
             }
             updateLocalTime();
-            setInterval(updateTime, 60000); // Refresh the time every 60 seconds (60000 milliseconds)
+            setInterval(updateLocalTime, 60000); // Refresh the time every 60 seconds (60000 milliseconds)
 
         switch(units)
             {
@@ -181,9 +181,9 @@ function get_after()
     var city = document.getElementById("my_city").value;
     const select_units = document.getElementById("units");
     let units = select_units.value;
-    
+
     const api_key = 'b2273b21514c4decb2b45606240806';  // API key from weatherapi.com
-    const url = "http://api.weatherapi.com/v1/forecast.json?key="+api_key+"&q="+city+"&days=2"; 
+    const url = "https://api.weatherapi.com/v1/forecast.json?key="+api_key+"&q="+city+"&days=3"; 
 
     fetch(url)
     .then(function(response) {
@@ -200,26 +200,11 @@ function get_after()
         let icon = data.forecast.forecastday[2].day.condition.icon;
 
         // LOCAL TIME/DATE FUNCTION
-        const timezone = data.forecast.forecastday.date;
-        const timezoneUrl = "http://worldtimeapi.org/api/timezone/"+timezone;
-        fetch(timezoneUrl)
-            .then(function(timeNow) {
-                return timeNow.json(); // Parse the response body as JSON
-            })
-            .then(function(tData) {
-                console.log(tData); 
-                const lDatetime = new Date(tData.datetime);
-                const fLocalDate = lDatetime.toLocaleDateString('en-US', {
-                    timeZone: timezone,
-                    weekday: 'short',
-
-                });
-                date = fLocalDate;
-            })
-            .catch(function(err) {
-                console.log('Fetch Error :-S', err);
-                date = "Error: Unable to fetch local time."; // Display an error message
-            });
+        const forecastDay = new Date(data.forecast.forecastday[2].date);
+        const afterDate = forecastDay.toLocaleDateString('en-US', {
+            weekday: 'short',
+        });
+        date = afterDate.toUpperCase();
         
         switch(units)
             {
@@ -230,7 +215,7 @@ function get_after()
                 break;
 
             case 'k':
-                tempDate = ("<b>"+date+"</b><br>High: "+((273.15+ddata.forecast.forecastday[2].day.maxtemp_c).toFixed(2))+"K <br>"
+                tempDate = ("<b>"+date+"</b><br>High: "+((273.15+data.forecast.forecastday[2].day.maxtemp_c).toFixed(2))+"K <br>"
                     + "Low: "+((273.15+ddata.forecast.forecastday[2].day.mintemp_c).toFixed(2))+"K <br>"
                     + "Average: "+((273.15+ddata.forecast.forecastday[2].day.avgtemp_c).toFixed(2))+"K <br>");
                 break;
