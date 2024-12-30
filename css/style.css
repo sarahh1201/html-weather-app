@@ -140,6 +140,12 @@ h3 {
 /* FOOTER - END */
 
 @media screen and (max-width: 481px) {
+    .page {
+        /* Spacings */
+        margin-left: 50px;
+        margin-right: 50px;
+        padding: 10px; /* Inside spacing */
+    }
     h1 {
         size: 20px;
         color: rgb(13, 37, 38);
