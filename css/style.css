@@ -140,6 +140,15 @@ h3 {
 /* FOOTER - END */
 
 @media screen and (max-width: 481px) {
+    h1 {
+        size: 20px;
+        color: rgb(13, 37, 38);
+    }
+    h3 {
+        size: 16px;
+        color: rgb(66, 109, 110);  
+    }
+
     .nav .right { /* Search + Button */
         display: flex;
         align-items: center;
@@ -175,6 +184,7 @@ h3 {
         margin: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 300px;
     }
     .weather {
         display: grid;
