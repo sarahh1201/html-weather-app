@@ -1,3 +1,17 @@
+const get_info = document.getElementById('my_city');
+
+get_info.addEventListener('keydown', (event) => {
+    if (event.key === "Enter") {
+      main(); // Call the main function when Enter is pressed
+    }
+  });
+
+const change_units = document.getElementById('units');
+
+change_units.addEventListener('change', () => {
+    main(); // Call the main function when the selection changes
+});
+
 function get_time()
 {   
     var city = document.getElementById("my_city").value;
@@ -217,8 +231,8 @@ function get_tomorrow()
 
             case 'k':
                 tempTomorrow = ("<h3>"+date+"</h3><hr><br>High: "+((273.15+data.forecast.forecastday[1].day.maxtemp_c).toFixed(2))+"K <br>"
-                    + "Low: "+((273.15+ddata.forecast.forecastday[1].day.mintemp_c).toFixed(2))+"K <br>"
-                    + "Average: "+((273.15+ddata.forecast.forecastday[1].day.avgtemp_c).toFixed(2))+"K <br>");
+                    + "Low: "+((273.15+data.forecast.forecastday[1].day.mintemp_c).toFixed(2))+"K <br>"
+                    + "Average: "+((273.15+data.forecast.forecastday[1].day.avgtemp_c).toFixed(2))+"K <br>");
                 break;
 
             default:
@@ -281,8 +295,8 @@ function get_after()
 
             case 'k':
                 tempDate = ("<h3>"+date+"</h3><hr><br>High: "+((273.15+data.forecast.forecastday[2].day.maxtemp_c).toFixed(2))+"K <br>"
-                    + "Low: "+((273.15+ddata.forecast.forecastday[2].day.mintemp_c).toFixed(2))+"K <br>"
-                    + "Average: "+((273.15+ddata.forecast.forecastday[2].day.avgtemp_c).toFixed(2))+"K <br>");
+                    + "Low: "+((273.15+data.forecast.forecastday[2].day.mintemp_c).toFixed(2))+"K <br>"
+                    + "Average: "+((273.15+data.forecast.forecastday[2].day.avgtemp_c).toFixed(2))+"K <br>");
                 break;
 
             default:
