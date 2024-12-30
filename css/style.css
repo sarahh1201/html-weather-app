@@ -139,7 +139,7 @@ h3 {
 }
 /* FOOTER - END */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 481px) {
     .nav .right { /* Search + Button */
         display: flex;
         align-items: center;
@@ -148,7 +148,7 @@ h3 {
     }
     .city_search { /* Search Bar */
         background-color:#e1eaeb;
-        width: 200px; 
+        width: 100px; 
         border-radius: 15px; 
         padding: 5px; 
         border: 1px solid #ccc;
@@ -161,7 +161,7 @@ h3 {
         border: 1px solid #ccc;
     }
     .select_unit { /* Dropdown */
-        width: 100px; 
+        width: 75px; 
         padding: 5px; 
         border-radius: 5px; 
         border: 1px solid #ccc; 
