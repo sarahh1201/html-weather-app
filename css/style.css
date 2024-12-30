@@ -138,3 +138,19 @@ h3 {
     color: #e1eaeb;
 }
 /* FOOTER - END */
+
+@media (max-width: 768px) {
+    .weather {
+        text-align:justify;
+        justify-content: center;
+      }
+    .weather h3 {
+        color: rgb(25, 54, 54);  
+        word-spacing: normal;
+    }
+    .weather h4 {
+        color: rgb(25, 54, 54);  
+        word-spacing: normal;
+    }
+    
+  }
