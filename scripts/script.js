@@ -1,5 +1,3 @@
-const {get} = require("request");
-
 const get_info = document.getElementById('my_city');
 
 get_info.addEventListener('keydown', (event) => {
