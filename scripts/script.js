@@ -1,4 +1,4 @@
-const { get } = require("request");
+const {get} = require("request");
 
 const get_info = document.getElementById('my_city');
 
@@ -326,7 +326,7 @@ function get_hourly()
         // To be outputed 
         let icon = data.forecast.forecastday[0].hour[0].condition.icon;
 
-        const nowTime = new Date(data.forecast.forecastday[0].hour[0]);
+        const nowTime = new Date(data.forecast.forecastday[0].hour[0].time);
         const hourLater = new Date(nowTime);
         const formattedTime = hourLater.toLocaleTimeString('en-US', {
             hour: '2-digit',
