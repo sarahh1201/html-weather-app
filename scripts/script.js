@@ -91,8 +91,6 @@ function get_today()
         let update = document.getElementById("update_output");
         let cond_icon = document.getElementById("cond_icon");
 
-        let nowTemp_output = document.getElementById("Nowtempurature_output")
-
         // To be outputed 
         let icon = data.forecast.forecastday[0].day.condition.icon;
 
@@ -118,10 +116,6 @@ function get_today()
                     + "Wind: "+data.current.wind_mph+" mph <br>"
                     + "Wind Direction: "+data.current.wind_dir+"<br>"
                     + "Degree: "+data.current.wind_degree+ "<br>");
-
-                nowTemp = ("<b>NOW</b><br>Temperature: "+data.forecast.forecastday[0].hour[0].temp_f+"°F <br>"
-                    + "Feels Like: "+data.forecast.forecastday[0].hour[0].feelslike_f+"°F <br>"
-                    + "Wind Chill: "+data.forecast.forecastday[0].hour[0].windchill_f+"°F <br>");
                 
                 break;
 
@@ -146,9 +140,6 @@ function get_today()
                     + "Wind Direction: "+data.current.wind_dir+"<br>"
                     + "Degree: "+data.current.wind_degree+ "<br>");
                     
-                nowTemp = ("<b>NOW</b><br>Temperature: "+((273.15+data.forecast.forecastday[0].hour[0].temp_c).toFixed(2))+"K <br>"
-                    + "Feels Like: "+((273.15+data.forecast.forecastday[0].hour[0].feelslike_c).toFixed(2))+"K <br>"
-                    + "Wind Chill: "+((273.15+data.forecast.forecastday[0].hour[0].windchill_c).toFixed(2))+"K <br>");
                 break;
 
             default:
@@ -172,10 +163,6 @@ function get_today()
                     + "Wind Direction: "+data.current.wind_dir+"<br>"
                     + "Degree: "+data.current.wind_degree+ "<br>");
 
-                nowTemp = ("<b>NOW</b><br>Temperature: "+data.forecast.forecastday[0].hour[0].temp_c+"°C <br>"
-                    + "Feels Like: "+data.forecast.forecastday[0].hour[0].feelslike_c+"°C <br>"
-                    + "Wind Chill: "+data.forecast.forecastday[0].hour[0].windchill_c+"°C <br>");
-
                 break;
             }
 
@@ -183,8 +170,6 @@ function get_today()
         temp_output.innerHTML = `${temp}<br>${precip}<br>${wind}`; 
         update.innerHTML = `Last Updated: ${data.current.last_updated} in ${data.location.tz_id} timezone<br>`;
         cond_icon.src = `${icon}`;
-
-        nowTemp_output.innerHTML = `${nowTemp}`; 
     })
 
 }
@@ -315,6 +300,58 @@ function get_after()
         let output = document.getElementById("day_after_output");
         output.innerHTML = "Error: Unable to fetch weather data."; // Display an error message
     });
+}
+
+function get_hourly()
+{
+    var city = document.getElementById("my_city").value;
+    const select_units = document.getElementById("units");  
+    let units = select_units.value;
+
+    const api_key = 'b2273b21514c4decb2b45606240806';  // API key from weatherapi.com
+    const url = "https://api.weatherapi.com/v1/forecast.json?key="+api_key+"&q="+city+"&days=3"; 
+    
+    fetch(url)
+    .then(function(response) {
+        return response.json(); // Parse the response body as JSON
+    })
+    .then(function(data) {
+        console.log(data);  // Log the data to check it in the console
+
+        // Display the data on the webpage using backticks for template literals
+        let nowTemp_output = document.getElementById("hourly")
+
+        // To be outputed 
+        let icon = data.forecast.forecastday[0].hour[0].condition.icon;
+
+        switch(units)
+            {
+            case 'i':
+                nowTemp = ("<b>NOW</b><br>Temperature: "+data.forecast.forecastday[0].hour[0].temp_f+"°F <br>"
+                    + "Feels Like: "+data.forecast.forecastday[0].hour[0].feelslike_f+"°F <br>"
+                    + "Wind Chill: "+data.forecast.forecastday[0].hour[0].windchill_f+"°F <br>");
+                
+                break;
+
+            case 'k':
+                nowTemp = ("<b>NOW</b><br>Temperature: "+((273.15+data.forecast.forecastday[0].hour[0].temp_c).toFixed(2))+"K <br>"
+                    + "Feels Like: "+((273.15+data.forecast.forecastday[0].hour[0].feelslike_c).toFixed(2))+"K <br>"
+                    + "Wind Chill: "+((273.15+data.forecast.forecastday[0].hour[0].windchill_c).toFixed(2))+"K <br>");
+                break;
+
+            default:
+                nowTemp = ("<b>NOW</b><br>Temperature: "+data.forecast.forecastday[0].hour[0].temp_c+"°C <br>"
+                    + "Feels Like: "+data.forecast.forecastday[0].hour[0].feelslike_c+"°C <br>"
+                    + "Wind Chill: "+data.forecast.forecastday[0].hour[0].windchill_c+"°C <br>");
+
+                break;
+            }
+
+        //OUTPUTS
+        nowTemp_output.innerHTML = `${nowTemp}`; 
+        cond_icon.src = `${icon}`;
+    })
+
 }
 
 function get_astro()
