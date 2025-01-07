@@ -326,6 +326,14 @@ function get_hourly()
         // To be outputed 
         let icon = data.forecast.forecastday[0].hour[0].condition.icon;
 
+        const nowTime = new Date(data.forecast.forecastday[0].hour[0]);
+        const hourLater = new Date(nowTime);
+        const formattedTime = hourLater.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+        });
+
+        time = formattedTime;
+
         switch(units)
             {
             case 'i':
@@ -350,7 +358,7 @@ function get_hourly()
             }
 
         //OUTPUTS
-        nowTemp_output.innerHTML = `${nowTemp}`; 
+        nowTemp_output.innerHTML = `${time}<br>${nowTemp}`; 
         cond_icon.src = `${icon}`;
     })
 
