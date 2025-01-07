@@ -1,3 +1,5 @@
+const { get } = require("request");
+
 const get_info = document.getElementById('my_city');
 
 get_info.addEventListener('keydown', (event) => {
@@ -393,6 +395,7 @@ function main()
 {
     get_time();
     get_astro();
+    get_hourly();
     get_today();
     get_tomorrow();
     get_after();
