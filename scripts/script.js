@@ -319,45 +319,45 @@ function get_hourly()
         console.log(data);  // Log the data to check it in the console
 
         // Display the data on the webpage using backticks for template literals
-        let nowTemp_output = document.getElementById("hourly")
+        let hourlyContainer = document.getElementById("hourly")
+        hourlyContainer.innerHTML = "";
 
-        // To be outputed 
-        let icon = data.forecast.forecastday[0].hour[0].condition.icon;
+        for (let i = 0; i < 24; i++) {
+            let time = new Date(data.forecast.forecastday[0].hour[i].time);
+            let formattedTime = time.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+            });
 
-        const nowTime = new Date(data.forecast.forecastday[0].hour[0].time);
-        const hourLater = new Date(nowTime);
-        const formattedTime = hourLater.toLocaleTimeString('en-US', {
-            hour: '2-digit',
-        });
-
-        time = formattedTime;
-
-        switch(units)
+            switch(units)
             {
             case 'i':
-                nowTemp = ("<b>NOW</b><br>Temperature: "+data.forecast.forecastday[0].hour[0].temp_f+"°F <br>"
-                    + "Feels Like: "+data.forecast.forecastday[0].hour[0].feelslike_f+"°F <br>"
-                    + "Wind Chill: "+data.forecast.forecastday[0].hour[0].windchill_f+"°F <br>");
+                nowTemp = ("<b>"+formattedTime+"</b><br>Temperature: "+data.forecast.forecastday[0].hour[i].temp_f+"°F <br>"
+                    + "Feels Like: "+data.forecast.forecastday[0].hour[i].feelslike_f+"°F <br>"
+                    + "Wind Chill: "+data.forecast.forecastday[0].hour[i].windchill_f+"°F <br>");
                 
                 break;
 
             case 'k':
-                nowTemp = ("<b>NOW</b><br>Temperature: "+((273.15+data.forecast.forecastday[0].hour[0].temp_c).toFixed(2))+"K <br>"
-                    + "Feels Like: "+((273.15+data.forecast.forecastday[0].hour[0].feelslike_c).toFixed(2))+"K <br>"
-                    + "Wind Chill: "+((273.15+data.forecast.forecastday[0].hour[0].windchill_c).toFixed(2))+"K <br>");
+                nowTemp = ("<b>"+formattedTime+"</b><br>Temperature: "+((273.15+data.forecast.forecastday[0].hour[i].temp_c).toFixed(2))+"K <br>"
+                    + "Feels Like: "+((273.15+data.forecast.forecastday[0].hour[i].feelslike_c).toFixed(2))+"K <br>"
+                    + "Wind Chill: "+((273.15+data.forecast.forecastday[0].hour[i].windchill_c).toFixed(2))+"K <br>");
                 break;
 
             default:
-                nowTemp = ("<b>NOW</b><br>Temperature: "+data.forecast.forecastday[0].hour[0].temp_c+"°C <br>"
-                    + "Feels Like: "+data.forecast.forecastday[0].hour[0].feelslike_c+"°C <br>"
-                    + "Wind Chill: "+data.forecast.forecastday[0].hour[0].windchill_c+"°C <br>");
+                nowTemp = ("<b>"+formattedTime+"</b><br>Temperature: "+data.forecast.forecastday[0].hour[i].temp_c+"°C <br>"
+                    + "Feels Like: "+data.forecast.forecastday[0].hour[i].feelslike_c+"°C <br>"
+                    + "Wind Chill: "+data.forecast.forecastday[0].hour[i].windchill_c+"°C <br>");
 
                 break;
             }
 
-        //OUTPUTS
-        nowTemp_output.innerHTML = `${time}<br>${nowTemp}`; 
-        cond_icon.src = `${icon}`;
+            //OUTPUTS
+            const hourlyItem = document.createElement("div");
+            hourlyItem.classList.add("hourly-item"); // Apply styles if needed
+            hourlyItem.innerHTML = nowTemp;
+
+            hourlyContainer.appendChild(hourlyItem); // Add to the container
+        }
     })
 
 }

@@ -87,25 +87,31 @@ h3 {
     padding: 10px; /* Inside spacing */
 }
 
-.scrollbox {
-    display: grid;
-    grid-template-columns: 1fr; /* Single column layout */
-    text-align: justify;
-    justify-content: center;
+  #hourly-container {
     
-    width: 95%;
-    height: 50px; /* Increased height for better scrolling */
-    padding: 20px;
     background-color: #90acaf;
     margin: 20px auto; /* Center the box horizontally */
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    
-    overflow-x: auto; /* Enable vertical scrolling */
-  }
-  .scrollbox::-webkit-scrollbar {
-    width: 8px; /* Width of the vertical scrollbar */
-  }
+    padding: 10px; /* Optional: Add padding for aesthetics */
+
+    width: 95%; /* Adjust as needed */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent wrapping of child elements */
+}
+
+#hourly {
+    display: inline-block; /* Ensure child elements are treated inline */
+}
+
+.hourly-item {
+    display: inline-block; /* Each hourly data block will be inline */
+    margin-right: 20px; /* Add spacing between hourly items */
+
+    background-color: #90acaf;
+    border-radius: 10px;
+    text-align: center; /* Center-align text for readability */
+}
   
 .box {
     padding: 20px;
@@ -229,3 +235,5 @@ h3 {
     }
     
   }
+
+
