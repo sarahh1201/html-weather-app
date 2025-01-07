@@ -86,9 +86,15 @@ h3 {
     margin-right: 100px;
     padding: 10px; /* Inside spacing */
 }
+#page {
+    display: none;
+}
+#current_dateTime {
+    display: contents;
+}
 
-  #hourly-container {
-    
+#hourly-container {
+
     background-color: #90acaf;
     margin: 20px auto; /* Center the box horizontally */
     border-radius: 10px;

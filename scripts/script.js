@@ -1,7 +1,22 @@
-const get_info = document.getElementById('my_city');
+const showPage = document.getElementById("page");
+const button = document.getElementById("my_button");
+const get_info = document.getElementById('my_city'); 
+
+button.addEventListener("click", () => {
+    if (showPage.style.display === "none" || showPage.style.display === "") {
+        showPage.style.display = "block";
+        get_info.textContent = "Hide Section"; // Update button text
+    } else {
+        
+    }
+});
 
 get_info.addEventListener('keydown', (event) => {
     if (event.key === "Enter") {
+        if (showPage.style.display === "none" || showPage.style.display === "") {
+            showPage.style.display = "block";
+            get_info.textContent = "Hide Section"; // Update button text
+        } else {}
       main(); // Call the main function when Enter is pressed
     }
   });
